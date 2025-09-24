@@ -112,8 +112,12 @@
     border-radius: 50%;
     height: 100%;
     width: 100%;
+    animation: avatarRotate 10s linear infinite;
+    transition: transform 0.5s ease;
+    
 }
 #home-card #card-div .avatar:hover img {
+    animation-play-state: paused;
     transform: rotate(360deg);
 }
 #home-card #card-div .description {
@@ -831,6 +835,15 @@ ol li {
     }
     to {
         transform: rotate(480deg);
+    }
+}
+
+@keyframes avatarRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 @media (min-width: 900px) {
