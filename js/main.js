@@ -1,6 +1,3 @@
-// 定义mixins对象
-const mixins = {};
-
 // 细微流星雨背景特效
 mixins.meteorShower = {
     mounted() {
