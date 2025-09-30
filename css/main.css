@@ -689,7 +689,6 @@ video,
 .katex,
 .language,
 .page-current {
-    -webkit-user-select: none;
     user-select: none;
 }
 b,

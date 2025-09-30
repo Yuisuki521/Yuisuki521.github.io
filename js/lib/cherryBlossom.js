@@ -9,7 +9,7 @@ export default {
             
             // 创建樱花池
             const createCherryBlossom = (x, y) => {
-                const petalsCount = Math.floor(Math.random() * 3) + 5; // 5-7片花瓣
+                const petalsCount = Math.floor(Math.random() * 2) + 3; // 3-4片花瓣（减少了原来的5-7片）
                 const container = document.createElement('div');
                 container.classList.add('cherry-blossom-container');
                 container.style.position = 'fixed';
@@ -91,7 +91,7 @@ export default {
                 }
                 
                 // 创建多个樱花效果
-                const blossomCount = Math.floor(Math.random() * 3) + 2; // 2-4个樱花簇
+                const blossomCount = Math.floor(Math.random() * 2) + 1; // 1-2个樱花簇（减少了原来的2-4个）
                 for (let i = 0; i < blossomCount; i++) {
                     const offsetX = (Math.random() - 0.5) * 20;
                     const offsetY = (Math.random() - 0.5) * 20;
