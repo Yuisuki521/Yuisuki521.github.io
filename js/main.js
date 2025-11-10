@@ -115,7 +115,7 @@ mixins.cherryBlossom = {
         initCherryBlossomEffect() {
             // 创建樱花池
             const createCherryBlossom = (x, y) => {
-                const petalsCount = Math.floor(Math.random() * 3) + 2; // 2-4片花瓣（减少了原来的8-12片）
+                const petalsCount = Math.floor(Math.random() * 5) + 8; // 8-12片花瓣，增加花瓣数量
                 const container = document.createElement('div');
                 container.classList.add('cherry-blossom-container');
                 container.style.position = 'fixed';
@@ -130,25 +130,28 @@ mixins.cherryBlossom = {
                     const petal = document.createElement('div');
                     petal.classList.add('cherry-petal');
                     
-                    // 设置花瓣样式
-                    const size = Math.random() * 10 + 5; // 5-15px，减小花瓣尺寸范围
-                    const delay = Math.random() * 0.5;
-                    const duration = Math.random() * 3 + 2; // 2-5秒，缩短动画时间
-                    const angle = (i / petalsCount) * 360;
+                    // 设置花瓣样式 - 增加更多随机性和变化
+                    const size = Math.random() * 15 + 5; // 5-20px，增大花瓣尺寸范围
+                    const delay = Math.random() * 0.8;
+                    const duration = Math.random() * 5 + 3; // 3-8秒，延长动画时间
+                    const angle = (i / petalsCount) * 360 + Math.random() * 30;
+                    const rotation = Math.random() * 360; // 随机初始旋转
                     
-                    const hue = Math.random() * 20 + 345;
-                    const saturation = Math.random() * 20 + 80;
-                    const lightness = Math.random() * 15 + 80;
+                    // 随机颜色变化，增加粉色和淡红色的变化
+                    const hue = Math.random() * 20 + 345; // 345-365度，粉色到淡红色
+                    const saturation = Math.random() * 20 + 80; // 80-100%
+                    const lightness = Math.random() * 15 + 80; // 80-95%
                     const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
                     
                     petal.style.width = `${size}px`;
-                    petal.style.height = `${size * 1.5}px`;
+                    petal.style.height = `${size * 1.8}px`; // 更修长的花瓣
                     petal.style.background = color;
                     petal.style.borderRadius = '50% 50% 30% 30%';
                     petal.style.position = 'absolute';
-                    petal.style.transform = `rotate(${angle}deg) translateY(-${size * 2}px)`;
-                    petal.style.opacity = '0.8';
-                    petal.style.boxShadow = `0 0 10px rgba(${Math.floor(hue * 0.7)}, ${Math.floor(saturation * 2.55)}, ${Math.floor(lightness * 2.55)}, 0.8)`;
+                    petal.style.transform = `rotate(${angle}deg) translateY(-${size * 2}px) rotate(${rotation}deg)`;
+                    petal.style.opacity = '0.9';
+                    petal.style.boxShadow = `0 0 15px rgba(${Math.floor(hue * 0.7)}, ${Math.floor(saturation * 2.55)}, ${Math.floor(lightness * 2.55)}, 0.9)`;
+                    petal.style.filter = 'blur(0.5px)'; // 添加轻微模糊效果，增强视觉体验
                     
                     // 添加动画
                     petal.style.animation = `falling ${duration}s ease-in-out ${delay}s forwards`;
@@ -163,8 +166,8 @@ mixins.cherryBlossom = {
                     container.remove();
                 }, (Math.max(...Array.from(container.children).map(p => parseFloat(p.style.animationDuration)))) * 1000 + 100);
             };
-
-            // 添加CSS动画
+            
+            // 添加CSS动画 - 优化动画效果
             const addAnimationStyle = () => {
                 const styleId = 'cherry-blossom-animation';
                 if (!document.getElementById(styleId)) {
@@ -173,15 +176,19 @@ mixins.cherryBlossom = {
                     style.textContent = `
                         @keyframes falling {
                             0% {
-                                transform: translateY(0) rotate(0) scale(1);
+                                transform: translateY(0) rotate(0) scale(1) translateX(0);
+                                opacity: 0.9;
+                            }
+                            30% {
+                                transform: translateY(100px) rotate(180deg) scale(0.9) translateX(15px);
                                 opacity: 0.8;
                             }
-                            50% {
-                                transform: translateY(150px) rotate(180deg) scale(0.9);
-                                opacity: 0.6;
+                            60% {
+                                transform: translateY(200px) rotate(270deg) scale(0.8) translateX(-15px);
+                                opacity: 0.7;
                             }
                             100% {
-                                transform: translateY(300px) rotate(360deg) scale(0);
+                                transform: translateY(300px) rotate(360deg) scale(0.5) translateX(10px);
                                 opacity: 0;
                             }
                         }
@@ -189,7 +196,7 @@ mixins.cherryBlossom = {
                     document.head.appendChild(style);
                 }
             };
-
+            
             // 监听点击和触摸事件
             const handleInteraction = (e) => {
                 let x, y;
@@ -201,98 +208,91 @@ mixins.cherryBlossom = {
                     y = e.clientY;
                 }
                 
-                // 创建多个樱花效果 - 减少樱花簇数量
-                const blossomCount = Math.floor(Math.random() * 2) + 1; // 1-2个樱花簇（减少了原来的3-7个）
+                // 创建多个樱花效果 - 增加樱花簇数量
+                const blossomCount = Math.floor(Math.random() * 5) + 3; // 3-7个樱花簇
                 for (let i = 0; i < blossomCount; i++) {
-                    const offsetX = (Math.random() - 0.5) * 20;
-                    const offsetY = (Math.random() - 0.5) * 20;
+                    const offsetX = (Math.random() - 0.5) * 30;
+                    const offsetY = (Math.random() - 0.5) * 30;
                     setTimeout(() => {
                         createCherryBlossom(x + offsetX, y + offsetY);
-                    }, i * 100);
+                    }, i * 80);
                 }
             };
-
-            // 关闭鼠标移动效果，减少性能消耗
-            const handleMouseMove = () => { /* 禁用鼠标移动效果 */ };
-
+            
+            // 添加额外的鼠标移动效果 - 增强交互体验
+            const handleMouseMove = (e) => {
+                // 随机触发，避免性能问题
+                if (Math.random() > 0.95) {
+                    const x = e.clientX;
+                    const y = e.clientY;
+                    const smallBlossomCount = Math.floor(Math.random() * 2) + 1; // 1-2个小樱花簇
+                    for (let i = 0; i < smallBlossomCount; i++) {
+                        const offsetX = (Math.random() - 0.5) * 15;
+                        const offsetY = (Math.random() - 0.5) * 15;
+                        setTimeout(() => {
+                            const miniCreateCherryBlossom = (x, y) => {
+                                const petalsCount = Math.floor(Math.random() * 3) + 3; // 3-5片小花瓣
+                                const container = document.createElement('div');
+                                container.classList.add('cherry-blossom-container-small');
+                                container.style.position = 'fixed';
+                                container.style.left = `${x}px`;
+                                container.style.top = `${y}px`;
+                                container.style.pointerEvents = 'none';
+                                container.style.zIndex = '9998';
+                                container.style.transform = 'translate(-50%, -50%)';
+                                
+                                for (let i = 0; i < petalsCount; i++) {
+                                    const petal = document.createElement('div');
+                                    petal.classList.add('cherry-petal-small');
+                                    const size = Math.random() * 5 + 2; // 2-7px
+                                    const delay = Math.random() * 0.3;
+                                    const duration = Math.random() * 3 + 2; // 2-5秒
+                                    const angle = (i / petalsCount) * 360;
+                                    
+                                    const hue = Math.random() * 20 + 345;
+                                    const saturation = Math.random() * 20 + 80;
+                                    const lightness = Math.random() * 15 + 80;
+                                    const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                                    
+                                    petal.style.width = `${size}px`;
+                                    petal.style.height = `${size * 1.5}px`;
+                                    petal.style.background = color;
+                                    petal.style.borderRadius = '50% 50% 30% 30%';
+                                    petal.style.position = 'absolute';
+                                    petal.style.transform = `rotate(${angle}deg) translateY(-${size * 2}px)`;
+                                    petal.style.opacity = '0.8';
+                                    petal.style.boxShadow = `0 0 8px rgba(${Math.floor(hue * 0.7)}, ${Math.floor(saturation * 2.55)}, ${Math.floor(lightness * 2.55)}, 0.8)`;
+                                    petal.style.animation = `falling ${duration}s ease-in-out ${delay}s forwards`;
+                                    
+                                    container.appendChild(petal);
+                                }
+                                
+                                document.body.appendChild(container);
+                                
+                                setTimeout(() => {
+                                    container.remove();
+                                }, (Math.max(...Array.from(container.children).map(p => parseFloat(p.style.animationDuration)))) * 1000 + 100);
+                            };
+                            
+                            miniCreateCherryBlossom(x + offsetX, y + offsetY);
+                        }, i * 50);
+                    }
+                }
+            };
+            
             addAnimationStyle();
+            
+            // 添加事件监听器
             document.addEventListener('click', handleInteraction);
             document.addEventListener('touchstart', handleInteraction, { passive: true });
-            // 移除鼠标移动事件监听，减少性能消耗
+            document.addEventListener('mousemove', handleMouseMove, { passive: true });
             
             // 页面卸载时清理事件监听器
             window.addEventListener('beforeunload', () => {
                 document.removeEventListener('click', handleInteraction);
                 document.removeEventListener('touchstart', handleInteraction);
+                document.removeEventListener('mousemove', handleMouseMove);
             });
-        }
-    }
-};
-
-// 打字机效果mixins
-mixins.typewriter = {
-    mounted() {
-        this.initTypewriterEffect();
-    },
-    methods: {
-        initTypewriterEffect() {
-            const nameElement = document.querySelector('#home-card #card-div .name');
-            if (!nameElement) return;
-            
-            // 保存原始文本
-            const originalText = nameElement.textContent.trim();
-            // 清空元素内容，准备打字机效果
-            nameElement.textContent = '';
-            
-            // 打字机效果函数
-            const typewriter = (element, text, index = 0, speed = 100) => {
-                if (index < text.length) {
-                    // 添加下一个字符
-                    element.textContent += text.charAt(index);
-                    // 随机调整速度，让打字效果更自然
-                    const randomSpeed = speed + Math.random() * 50 - 25;
-                    // 继续下一个字符
-                    setTimeout(() => {
-                        typewriter(element, text, index + 1, speed);
-                    }, randomSpeed);
-                } else {
-                    // 打字完成后，可以添加光标闪烁效果
-                    this.addCursorEffect(element);
-                }
-            };
-            
-            // 添加光标闪烁效果
-            this.addCursorEffect = (element) => {
-                const cursor = document.createElement('span');
-                cursor.classList.add('typewriter-cursor');
-                cursor.textContent = '|';
-                element.appendChild(cursor);
-                
-                // 添加光标闪烁动画
-                const styleId = 'typewriter-cursor-animation';
-                if (!document.getElementById(styleId)) {
-                    const style = document.createElement('style');
-                    style.id = styleId;
-                    style.textContent = `
-                        .typewriter-cursor {
-                            animation: blink 1s step-end infinite;
-                            color: var(--text-color);
-                            font-weight: bold;
-                            margin-left: 2px;
-                        }
-                        @keyframes blink {
-                            from, to { opacity: 1; }
-                            50% { opacity: 0; }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                }
-            };
-            
-            // 延迟启动打字机效果，确保页面加载完成
-            setTimeout(() => {
-                typewriter(nameElement, originalText);
-            }, 500);
         }
     }
 };
