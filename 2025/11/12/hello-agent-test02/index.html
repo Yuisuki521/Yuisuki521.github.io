@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Yuisuki&#39;s home</title>
+    <title>hello agent test02 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -42,7 +42,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -152,40 +154,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>Yuisuki&#39;s home</h1>
-                <h3>To Be Continued</h3>
-                <h5>Love, games, and anime</h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>hello agent test02</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2025/11/12/hello-agent-test02/">
-        <h2 class="post-title">hello agent test02</h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -195,10 +168,9 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="介绍-Transformer-为机器翻译设计并遵循编码器-解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。"><a href="#介绍-Transformer-为机器翻译设计并遵循编码器-解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。" class="headerlink" title="介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。"></a>介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。</h1><h2 id="编码器与解码器的功能与协作"><a href="#编码器与解码器的功能与协作" class="headerlink" title="编码器与解码器的功能与协作"></a>编码器与解码器的功能与协作</h2><p>分析编码器读取输入词元生成上下文向量表示的功能，阐述解码器参考前文并咨询编码器结果生成下一个词的过程，说明两者协作实现翻译任务的机制。</p>
+    
+    <div class="content" v-pre>
+        <h1 id="介绍-Transformer-为机器翻译设计并遵循编码器-解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。"><a href="#介绍-Transformer-为机器翻译设计并遵循编码器-解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。" class="headerlink" title="介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。"></a>介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源，阐述编码器理解输入句子和解码器生成目标句子的任务分工。</h1><h2 id="编码器与解码器的功能与协作"><a href="#编码器与解码器的功能与协作" class="headerlink" title="编码器与解码器的功能与协作"></a>编码器与解码器的功能与协作</h2><p>分析编码器读取输入词元生成上下文向量表示的功能，阐述解码器参考前文并咨询编码器结果生成下一个词的过程，说明两者协作实现翻译任务的机制。</p>
 <h1 id="从自注意力到多头注意力"><a href="#从自注意力到多头注意力" class="headerlink" title="从自注意力到多头注意力"></a>从自注意力到多头注意力</h1><h2 id="自注意力机制的原理与计算"><a href="#自注意力机制的原理与计算" class="headerlink" title="自注意力机制的原理与计算"></a>自注意力机制的原理与计算</h2><p>解释自注意力机制允许模型兼顾句子中所有词并分配注意力权重的原理，阐述查询、键、值向量的生成及计算注意力得分、归一化和加权求和的过程。</p>
 <h2 id="多头注意力机制的设计与优势"><a href="#多头注意力机制的设计与优势" class="headerlink" title="多头注意力机制的设计与优势"></a>多头注意力机制的设计与优势</h2><p>介绍多头注意力将 Q、K、V 向量切分并独立计算注意力的设计，分析其让模型关注多种关系和不同位置信息的优势，展示其结构示意图。</p>
 <h2 id="多头注意力的实现与代码解析"><a href="#多头注意力的实现与代码解析" class="headerlink" title="多头注意力的实现与代码解析"></a>多头注意力的实现与代码解析</h2><p>展示多头注意力机制在 PyTorch 中的实现代码，解析线性变换、注意力计算、头部分割与合并等关键步骤，说明代码的功能和逻辑。</p>
@@ -223,203 +195,13 @@
 <h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>  缓解大语言模型幻觉是一个系统性工程，单一方法难以完全解决问题。实际应用中，建议结合多种策略（如 RAG + 工具调用 + 幻觉检测），根据具体任务场景选择最合适的组合。未来，随着研究的深入，模型的事实准确性将不断提升，为更可靠的 AI 应用奠定基础。</p>
 <h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>  设计一个优秀的论文辅助阅读智能体是一个系统工程，需要在模型选择、提示词工程、长文本处理和事实性保障等多个维度进行精心设计。通过采用强大的基座模型、结构化的提示策略、分块融合的长文本处理流程以及多重事实校验机制</p>
 
-            
-        </div>
     </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2025/11/12/hello-agent-test02/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/11/10/hello-agent-test01/">
-        <h2 class="post-title">hello-agent-test01</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/11/10
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="学习经验总结"><a href="#学习经验总结" class="headerlink" title="学习经验总结"></a>学习经验总结</h1><p>核心收获：1）智能体的本质是 “感知 - 思考 - 行动 - 观察” 闭环，核心是 “自主性”；2）从传统智能体到 LLM 驱动新范式，按决策架构、时间反应性、知识表示可精准分类；3）LLM 智能体实现核心是 “提示工程 + 工具调用 + 循环迭代”，PEAS 模型可清晰定义任务环境。<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-10%20234920.png?raw=true" alt="本地图片"></p>
-<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="智能体判断与类型分析"><a href="#智能体判断与类型分析" class="headerlink" title="智能体判断与类型分析"></a>智能体判断与类型分析</h2><p>• case A：不属于，仅具算力，无感知、行动能力和目标。<br>• case B：属于，反应式 + 基于模型的反射智能体，传感器感知障碍物，执行器快速避障，目标是安全行驶。<br>• case C：属于，规划式 + 学习型智能体，规划多步棋路，通过强化学习进化，目标是赢棋。<br>• case D：属于，混合式 + 神经符号主义智能体，即时回应 + 工具查询，动态解决投诉，目标是安抚用户。</p>
-<h2 id="智能健身教练的-PEAS-模型与环境特性"><a href="#智能健身教练的-PEAS-模型与环境特性" class="headerlink" title="智能健身教练的 PEAS 模型与环境特性"></a>智能健身教练的 PEAS 模型与环境特性</h2><p>• PEAS 模型：性能度量（目标达成率、安全性、满意度）；环境（用户身体状态、运动场景、设备反馈）；执行器（语音指导、计划生成、饮食建议）；传感器（可穿戴设备、用户交互接口）。<br>• 环境特性：部分可观察、随机性、动态性、序贯性。</p>
-<h2 id="售后退款方案对比与混合方案"><a href="#售后退款方案对比与混合方案" class="headerlink" title="售后退款方案对比与混合方案"></a>售后退款方案对比与混合方案</h2><p>• 方案 A（Workflow）：优点（高效、可解释、成本低）；缺点（刚性强、适配差），适合标准化场景。<br>• 方案 B（Agent）：优点（灵活、个性化、自学习）；缺点（开发难、黑箱、成本高），适合复杂场景。<br>• 方案 C（混合）：常规场景用 Workflow，例外 &#x2F; 复杂场景用 Agent，人工兜底 + 反馈优化。</p>
-<h2 id="旅行助手功能扩展"><a href="#旅行助手功能扩展" class="headerlink" title="旅行助手功能扩展"></a>旅行助手功能扩展</h2><p>• 记忆功能：新增偏好存储模块，将偏好嵌入 TAO 循环的 prompt。<br>• 售罄备选：工具新增门票查询，识别售罄后重新调用工具推荐同类型景点。<br>• 3 次拒绝调整：记录拒绝次数，触发反思，询问偏好或切换推荐类型。</p>
-<h2 id="医疗诊断助手的系统-1-与系统-2-协同"><a href="#医疗诊断助手的系统-1-与系统-2-协同" class="headerlink" title="医疗诊断助手的系统 1 与系统 2 协同"></a>医疗诊断助手的系统 1 与系统 2 协同</h2><p>• 系统 1：快速症状匹配、危险信号识别、基础信息采集。<br>• 系统 2：复杂症状分析、病史整合、差异化诊断。<br>• 协同：系统 1 初筛→简单情况直接输出，复杂 &#x2F; 危险情况转系统 2→系统 1 转化结果输出。</p>
-<h2 id="智能体局限分析"><a href="#智能体局限分析" class="headerlink" title="智能体局限分析"></a>智能体局限分析</h2><p>• 幻觉原因：数据噪声、模型追求连贯、缺乏实时核查。<br>• 无循环限制风险：无限循环、资源耗尽、任务超时。<br>• 智能评估：需综合自主性、灵活性、鲁棒性、效率等，仅准确率不足。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2025/11/10/hello-agent-test01/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/09/24/Understanding-of-Markdown/">
-        <h2 class="post-title">Understanding of Markdown</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/9/24
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="第一次接触markdown"><a href="#第一次接触markdown" class="headerlink" title="第一次接触markdown"></a>第一次接触markdown</h1><p>第一次来到这里，听到学长说的还有教学中的md，我是茫然的，这是什么东西啊？？<br>当我去了解了一下，我逐渐开始明白这个东西有多么好用</p>
-<h2 id="对md的理解"><a href="#对md的理解" class="headerlink" title="对md的理解"></a>对md的理解</h2><p>让作者专注文字而非排版，通过轻量级符号实现高效格式化文档。</p>
-<h3 id="方便性"><a href="#方便性" class="headerlink" title="方便性"></a>方便性</h3><p>1. 学习成本低：语法简单易记<br>2. 编写效率高：键盘不离开主键区<br>3. 跨平台兼容：纯文本通用性<br>4. 转换灵活：支持导出多种格式<br>5. 版本控制友好：适合Git管理</p>
-<h4 id="对新手十分友好"><a href="#对新手十分友好" class="headerlink" title="对新手十分友好"></a>对新手十分友好</h4><p>最打动新手的应该是：五分钟就能完成第一篇格式化文档。这需要拆解三个层面：一是语法记忆量极小（10个符号覆盖90%场景），二是即时反馈的成就感（输入符号后实时预览效果），三是容错率高（漏空格也能被纠正）。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2025/09/24/Understanding-of-Markdown/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/09/23/My-anime-watching-history/">
-        <h2 class="post-title">My anime watching history</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/9/23
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="我的入宅番"><a href="#我的入宅番" class="headerlink" title="我的入宅番"></a>我的入宅番</h1><p>我的入宅经历还算坎坷，看的第一部番是Charlotte,当时是小学，竟然看了一个开头就退出结束了！！！第二次看还是没看进去。。。<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/ch1.jpg?raw=true" alt="本地图片"><br>但是我与Charlotte的缘分真的到此结束了吗    </p>
-<h1 id="我的第二次接触？"><a href="#我的第二次接触？" class="headerlink" title="我的第二次接触？"></a>我的第二次接触？</h1><p>在我没有手机的情况下，我打开了电视，找到了这部番<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/gw1.jpg?raw=true" alt="本地图片"><br>激起我对动漫美好的向往</p>
-<h1 id="再次相遇"><a href="#再次相遇" class="headerlink" title="再次相遇"></a>再次相遇</h1><p>再一次打开B站，看到追番列表，我又看到了Charlotte,这一次终于看完哩，从此发不可收拾。</p>
-<h1 id="我的青春恋爱物语果然有问题！"><a href="#我的青春恋爱物语果然有问题！" class="headerlink" title="我的青春恋爱物语果然有问题！"></a>我的青春恋爱物语果然有问题！</h1><p>这部番对于我来说造成了很大的影响，开篇即是王炸<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/cw.jpg?raw=true" alt="本地文件"><br>青春是罪恶的谎言，讴歌青春的人们总是欺骗自己，在朋友的态度非常肯定的环境下，面对他们青春的两个字，无论是什么样的普遍认识，都扭曲了社会的准则。对他们来说，把谎言作为秘密的犯罪，即使失败了，也不只是全部青春的调味料。如果说这是青春的象征的话，即使是脸书失败的人，也可以说是美食青春吧。但是他们认为他们不会去。这是他们的自私崇拜吗。让我们一起来解释一下，青春的傻瓜们。我们爆炸吧！<br>有点中二啊，问题不大，第一篇我也不知道写啥<br>这部番对我影响很大，感觉做事要冷静，话可以减少，权衡利弊但也要灌入情感</p>
-<h1 id="感谢动漫"><a href="#感谢动漫" class="headerlink" title="感谢动漫"></a>感谢动漫</h1><p>动漫带给我很多感悟和快乐，造就了我的一些性格<br><img src="https://raw.githubusercontent.com/Yuisuki521/BlogImgs/637f013d18b4e1cdcb07efd2728168d19aa0af07/Yui.jpg" alt="本地文件"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2025/09/23/My-anime-watching-history/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/09/20/hello-world/">
-        <h2 class="post-title">Hello World</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/9/20
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2025/09/20/hello-world/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
     
-    <span class="current">1</span>
     
     
     
     
-</div>
-
-    </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" alt="avatar" />
-        </div>
-        <div class="name">Yuisuki521</div>
-        <div class="description">
-            <p>woooo~<br>qwq</p>
-
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
     
 </div>
 
@@ -451,6 +233,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
