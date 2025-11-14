@@ -181,7 +181,45 @@
         
 
 <div class="post">
-    <a href="/2025/11/12/hello-agent-test02/">
+    <a href="/2025/11/13/hello-agent-test03/hello-agent-test03/">
+        <h2 class="post-title">hello-agent-test03</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/11/13
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-13%20203505.png?raw=true" alt="本地图片"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-13%20203527.png?raw=true" alt="本地图片"></h2><p>这次大语言模型智能体的学习与实践，不仅是一次技术能力的提升，更是一次对 “智能” 本质的探索 —— 智能体的价值不在于 “无所不能”，而在于 “在已知边界内，高效连接推理与行动，持续逼近目标”。而亲手构建的过程，正是理解这一本质、并不断拓展其可能空间的最佳路径。</p>
+<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="1-ReAct、Plan-and-Solve-和-Reflection"><a href="#1-ReAct、Plan-and-Solve-和-Reflection" class="headerlink" title="1.ReAct、Plan-and-Solve 和 Reflection"></a>1.ReAct、Plan-and-Solve 和 Reflection</h2><p>（1）本质区别：<br>ReAct 模式：边想边做的探索者<br>阐述 ReAct“边想边做，边做边学” 的核心思想，以找物品为例，说明其想法、行动、观察的循环过程，总结其灵活应变但缺乏长期目标把控的特点。<br>Plan-and-Solve 模式：谋定而后动的规划者<br>解释该模式先规划再执行的流程，以复杂任务为例，体现规划调整过程，得出其适合多步骤、强依赖任务，但应对突发情况灵活性欠佳的结论。<br>Reflection 模式：自我反思的进步者<br>介绍其在执行中不断评估过往行为优化后续决策的特点，以写作、解题等场景为例说明基础反思过程，以及带强化学习的反思机制如何打分和调整策略。<br>（2）设计智能家居助手<br>对比三种范式，ReAct虽能实时响应但缺乏整体规划。Reflection 主要用于优化结果而非直接控制，Plan-and-Solve 适合复杂任务规划与调整，更符合助手需求。<br>因为：如能对设备控制制定完整计划，执行中根据情况调整，可满足多设备协同和按用户习惯自动调节。<br>（3）构建以 Plan-and-Solve 为主体，融入 ReAct 处理突发情况，利用 Reflection 优化决策的架构，阐述各部分工作流程和交互方式。像平常家庭管理用Plan-and-Solve，家庭成员出现生命安全或者家内煤气超标，断电可以用ReAct，再利用Reflection优化下一步行动。</p>
+<h2 id="2-正则表达式来解析大语言模型的输出"><a href="#2-正则表达式来解析大语言模型的输出" class="headerlink" title="2.正则表达式来解析大语言模型的输出"></a>2.正则表达式来解析大语言模型的输出</h2><p>（1）核心脆弱性<br>格式敏感：严格依赖 Thought:「Action:<code> 等固定标识符，模型输出少空格、多标点或换行会直接失效。 语义鲁棒性差：仅匹配字符串形式，无法理解模型输出的语义逻辑，比如 Action 参数缺失却符合正则格式时会误解析。 扩展性不足：新增工具或修改输出结构时，需重新编写正则表达式，维护成本随场景复杂度上升。 典型失败场景 （2）更鲁棒的输出解析方案 模型输出格式变体：如 Thought - xxxx「Action：xxxx」（符号替换）、多段换行分隔 Thought 和 Action。 内容嵌套干扰：Action 参数中包含 :「}</code> 等正则关键字符，导致匹配截断或全量失败。<br>逻辑不完整输出：模型仅生成 Thought 未生成 Action，或 Action 缺少必要参数，正则仍会提取残缺信息。<br>多轮交互累积误差：多轮对话中模型输出格式逐渐偏移，正则无法自适应调整。</p>
+<h2 id="3-工具调用"><a href="#3-工具调用" class="headerlink" title="3.工具调用"></a>3.工具调用</h2><p>尚在学习</p>
+<h2 id="4-Plan-and-Solve-范式将任务分解为”规划”和”执行”两个阶段。"><a href="#4-Plan-and-Solve-范式将任务分解为”规划”和”执行”两个阶段。" class="headerlink" title="4.Plan-and-Solve 范式将任务分解为”规划”和”执行”两个阶段。"></a>4.Plan-and-Solve 范式将任务分解为”规划”和”执行”两个阶段。</h2><p>（1）如何设计一个”动态重规划”机制？<br>反馈驱动：以执行结果（成功 &#x2F; 失败、实际输出 vs 预期目标）作为重规划触发信号。<br>最小修改：仅调整受影响的步骤，不重构整个计划，平衡效率与稳定性。<br>目标守恒：重规划后需保证最终目标不变，避免偏离核心任务。<br>（2）Plan-and-Solve 与 ReAct:在处理”预订一次从北京到上海的商务旅行（包括机票、酒店、租车）”这样的任务时，哪种范式更合适？为什么？<br>Plan-and-Solve 范式更合适。核心原因是该任务的 “多步骤强依赖、目标明确、需全局统筹” 特性，与 Plan-and-Solve 的全局规划优势高度适配，而 ReAct 的 “边想边做” 模式易出现逻辑混乱或资源浪费。<br>（3）尝试设计一个”分层规划”系统:先生成高层次的抽象计划，然后针对每个高层步骤再生成详细的子计划。这种设计有什么优势？<br>提升规划效率：解释分层规划通过减少不必要细节，快速确定关键步骤，节省时间精力，提高规划速度。<br>增强灵活性与适应性：阐述面对变化时，分层规划只需调整特定层次计划，无需全盘修改，能更好应对突发情况。<br>提高规划质量：说明分层规划从宏观到微观思考，全面考虑各层次关系，使计划更合理、全面、科学。<br>便于团队协作与沟通：分析分层规划按层次分配任务，成员明确职责，各层次计划成为沟通协作依据，减少冲突误解。</p>
+<h2 id="5-Reflection-的”执行-反思-优化”循环机制。"><a href="#5-Reflection-的”执行-反思-优化”循环机制。" class="headerlink" title="5.Reflection 的”执行-反思-优化”循环机制。"></a>5.Reflection 的”执行-反思-优化”循环机制。</h2><p>（1）如果使用两个不同的模型会带来什么影响？<br>强大模型用于反思的优势 快速模型用于执行的优势 模型间的协作流程与交互机制<br>（2）Reflection 机制的终止条件是”反馈中包含无需改进”或”达到最大迭代次数”。这种设计是否合理？能否设计一个更智能的终止条件？<br>现有设计基本合理但不够智能，更优方案需结合 “改进价值 + 反馈质量 + 迭代效果” 多维度判断。以 “改进价值是否为正” 为核心，结合反馈质量、迭代趋势、资源约束，形成复合终止规则。</p>
+<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>（1）ReAct 提示词和的 Plan-and-Solve 提示词，它们显然存在结构设计上的明显不同，这些差异是如何服务于各自范式的核心逻辑的？<br>两者结构差异精准匹配各自 “动态交互” 与 “先规划后执行” 的核心逻辑，直接决定任务推进方式。<br>（2）Reflection 提示词中，我们使用了”你是一位极其严格的代码评审专家”这样的角色设定。尝试修改这个角色设定（如改为”你是一位注重代码可读性的开源项目维护者”），观察输出结果的变化，并总结角色设定对智能体行为的影响。<br>角色设定为智能体提供了 “行为锚点”，明确了任务中的优先级排序。<br>角色的专业背景决定了评判维度，比如 “评审专家” 侧重 “纠错”，“维护者” 侧重 “协作”。<br>角色的语气特质会传递给智能体，影响输出的沟通风格</p>
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>（1）采用「Plan-and-Solve + Reflection」组合范式作为核心架构，工具需覆盖订单查询、规则匹配、邮件发送三类核心需求，提示词通过 “政策锚定 + 语气约束 + 反思机制” 平衡公司利益与用户友好，风险则通过技术校验、人工兜底等方式降低。<br>（2）订单与物流查询工具<br>功能描述：对接公司订单系统，输入用户 ID &#x2F; 订单号，返回订单状态（未发货 &#x2F; 已发货 &#x2F; 已签收）、付款金额、下单时间、物流轨迹等关键信息。<br>核心作用：为 “是否符合退款条件” 提供数据支撑（如 “未发货订单可直接退款”“已签收超 7 天需审核”）。<br>    退款政策规则匹配工具<br>功能描述：内置公司退款政策库（结构化存储，如 “食品类未开封 7 天内可退”“定制商品不支持退款”），输入 “退款理由 + 订单信息”，输出政策匹配结果及置信度。<br>核心作用：替代人工检索政策，确保决策一致性，同时输出置信度触发反思机制。<br>    邮件自动生成与发送工具<br>功能描述：根据 “退款结果（批准 &#x2F; 拒绝 &#x2F; 待复核）+ 订单信息 + 政策依据”，调用预设模板生成得体邮件，支持自动发送至用户预留邮箱，同时记录发送日志。<br>核心作用：标准化回复格式，保证语气友好，减少人工操作成本。<br>（3）利益平衡：通过 “决策约束” 锁定公司政策底线，避免经济损失；通过 “语气约束” 和 “替代方案” 降低用户不满，维护品牌口碑。<br>反思机制：明确置信度阈值和反思方向，避免模糊决策导致的纠纷。<br>（4）决策错误风险：对所有决策结果加 “人工抽检” 机制（抽检比例初期设为 30%，后续根据准确率调整）； 定期更新政策匹配工具的规则库，同步公司政策变化；记录错误案例，用于优化提示词和模型训练<br>用户体验风险：提示词中嵌入多组语气模板（如安抚型、解释型），根据场景自动匹配；邮件生成后增加 “语气校验” 模块，过滤生硬表述；收集用户反馈，迭代回复模板</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2025/11/13/hello-agent-test03/hello-agent-test03/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/11/12/hello-agent-test02/hello-agent-test02/">
         <h2 class="post-title">hello agent test02</h2>
     </a>
     <div class="category-and-date">
@@ -222,11 +260,11 @@
         
         
     </div>
-    <a href="/2025/11/12/hello-agent-test02/" class="go-post">阅读全文</a>
+    <a href="/2025/11/12/hello-agent-test02/hello-agent-test02/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2025/11/10/hello-agent-test01/">
+    <a href="/2025/11/10/test1%E5%AD%A6%E4%B9%A0/hello-agent-test01/">
         <h2 class="post-title">hello-agent-test01</h2>
     </a>
     <div class="category-and-date">
@@ -259,7 +297,7 @@
         
         
     </div>
-    <a href="/2025/11/10/hello-agent-test01/" class="go-post">阅读全文</a>
+    <a href="/2025/11/10/test1%E5%AD%A6%E4%B9%A0/hello-agent-test01/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
