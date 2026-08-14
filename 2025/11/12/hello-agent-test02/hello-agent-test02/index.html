@@ -91,6 +91,16 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -145,6 +155,24 @@
                     </div>
                 </a>
                 
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -166,11 +194,21 @@
             2025/11/12
         </span>
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         
     </div>
     
     <div class="content" v-pre>
         <h1 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容"></a>学习内容</h1><p>介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源。<br>阐述编码器理解输入句子和解码器生成目标句子的任务分工。<br>分析编码器读取输入词元生成上下文向量表示的功能，阐述解码器参考前文并咨询编码器结果生成下一个词的过程，说明两者协作实现翻译任务的机制。</p>
+<span id="more"></span>
 <h2 id="从自注意力到多头注意力"><a href="#从自注意力到多头注意力" class="headerlink" title="从自注意力到多头注意力"></a>从自注意力到多头注意力</h2><p>自注意力机制的原理与计算：<br>解释自注意力机制允许模型兼顾句子中所有词并分配注意力权重的原理，阐述查询、键、值向量的生成及计算注意力得分、归一化和加权求和的过程。<br>多头注意力机制的设计与优势：<br>介绍多头注意力将 Q、K、V 向量切分并独立计算注意力的设计，分析其让模型关注多种关系和不同位置信息的优势，展示其结构示意图。<br>多头注意力的实现与代码解析：<br>展示多头注意力机制在 PyTorch 中的实现代码，解析线性变换、注意力计算、头部分割与合并等关键步骤，说明代码的功能和逻辑。</p>
 <h2 id="前馈神经网络"><a href="#前馈神经网络" class="headerlink" title="前馈神经网络"></a>前馈神经网络</h2><p>前馈网络的结构与功能：<br>阐述前馈网络在 Transformer 层中紧跟多头注意力子层的结构，分析其独立作用于序列中每个词元向量并提取高阶特征的功能。<br>前馈网络的计算过程与参数设置：<br>解释前馈网络由两个线性变换和 ReLU 激活函数组成的计算过程，分析第一个线性层扩大维度和第二个线性层映射回原维度的参数设置，说明其对特征学习的作用。<br>前馈网络的代码实现与分析：<br>展示前馈网络在 PyTorch 中的实现代码，解析线性层定义、激活函数应用和 Dropout 操作的代码逻辑，说明代码如何实现前馈网络的功能。</p>
 <h2 id="残差连接与层归一化"><a href="#残差连接与层归一化" class="headerlink" title="残差连接与层归一化"></a>残差连接与层归一化</h2><p>残差连接的作用与原理：<br>介绍残差连接将子模块输入加到输出以解决梯度消失问题的作用，分析其在反向传播中让梯度绕过子模块直接传播的原理，说明对模型训练的帮助。<br>层归一化的原理与优势：<br>阐述层归一化对单个样本所有特征进行归一化的原理，分析其解决内部协变量偏移问题和稳定输入分布的优势，说明对模型收敛速度和稳定性的提升。</p>
@@ -200,7 +238,7 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2025 Yuisuki&#39;s home
+            2022 - 2026 Yuisuki&#39;s home
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>

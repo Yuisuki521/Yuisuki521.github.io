@@ -89,6 +89,16 @@
             <span>&ensp;Tags</span>
         </a>
         
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
     </nav>
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
@@ -143,6 +153,24 @@
                     </div>
                 </a>
                 
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
             </div>
         </transition>
     </nav>
@@ -181,10 +209,58 @@
         
 
 <div class="post">
+    <a href="/2026/08/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day1/">
+        <h2 class="post-title">心理健康助手+ai Day1</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/8/14
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>今天是心理健康助手＋ai项目的第一天，是我的第一个项目</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2026/08/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day1/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2025/11/16/hello-agent-test04/hello-agent-test04/">
         <h2 class="post-title">hello-agent-test04</h2>
     </a>
     <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
         
         <span class="date">
             <span class="icon">
@@ -199,8 +275,6 @@
         <div class="content" v-pre>
             
             <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><p>本次体验式学习通过 pip 快速安装框架，运行示例代码直观感受各项功能。无需深入底层实现，能快速上手框架用法、建立整体认知，高效完成入门体验。</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-16%20181732.png?raw=true" alt="本地图片"></h1><h1 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-16%20183419.png?raw=true" alt="本地图片"></h1><h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><p>1.（1）在7.1.1节中提到了当前主流框架的四个主要局限性。结合你在第六章习题或实际项目中使用过的某个框架的实际经验，说明这些问题是如何影响开发效率的。<br>核心结论：主流框架的四大局限性（模块耦合高、扩展性不足、性能瓶颈、调试复杂）会通过增加开发成本、限制功能迭代、延长问题定位时间，直接降低开发效率。<br>（2）HelloAgents 提出了”万物皆为工具”的设计理念，将 Memory、RAG、MCP 等模块都抽象为工具。这种设计有什么优势？是否存在局限性？请举例说明。<br>核心结论：将模块抽象为工具的设计理念（如 HelloAgents 中的 Memory、RAG、MCP）带来了以下优势：<br>优点：模块解耦：每个模块（如 Memory、RAG、MCP）都可以独立开发、测试和维护，避免了模块之间的强耦合。 可扩展性：新功能的添加可以通过添加新的工具类实现，而无需修改 existing 代码。 灵活性：不同的模块可以根据需要组合使用，实现定制化的智能体。<br>局限性：学习成本提升：抽象化设计要求开发者理解 “工具注册、调度、协同” 的底层逻辑，新手入门时需额外花费 1-2 周熟悉框架理念，而非直接上手开发。<br>工具协同复杂度增加：当多个工具存在依赖关系时，需手动处理工具的调用顺序和数据传递。相比内置协同逻辑的框架，复杂场景下的工具编排耗时更长。<br>轻微性能损耗：工具的抽象层会增加少量调用开销，在高并发场景中，相比无抽象的原生实现，响应延迟增加约 10-20ms，需通过性能优化抵消损耗。<br>（3）对比第四章从零实现的智能体代码和本章的框架化实现，框架化带来了哪些具体的改进？如果让你设计一个框架，你会优先考虑哪些设计原则？<br>优点：代码复用：框架提供了通用的模块（如 Memory、RAG、MCP），开发者可以直接使用，避免重复实现。 可维护性：框架的代码结构清晰，模块之间的耦合度低，方便维护和扩展。 开发效率：开发者可以专注于业务逻辑的实现，而无需关注底层细节。<br>局限性：学习成本提升：框架化设计要求开发者理解框架的工作原理，新手入门时需额外花费 1-2 周熟悉框架理念，而非直接上手开发。 定制性不足：框架提供的模块可能无法满足所有场景的需求，开发者需要根据具体情况进行定制。<br>设计原则：优先考虑代码复用和可维护性，避免引入不必要的复杂性。 提供灵活的扩展机制，允许开发者根据需求定制化框架。 考虑性能和响应延迟，避免引入显著的性能损耗。<br>2，4.尚在学习<br>3.<br>（1）Message 类使用了 Pydantic 的 BaseModel 进行数据验证。这种设计在实际应用中有哪些优势？<br>优势：数据验证：Pydantic 提供了强大的数据验证功能，确保 Message 对象的属性符合预期类型和约束。 代码简洁：使用 Pydantic 可以避免手动编写数据验证代码，减少出错的可能性。 文档自动生成：Pydantic 可以根据模型定义自动生成 API 文档，方便开发者理解和使用。<br>（2）Agent 基类定义了 run 和 _execute 两个方法，其中 run 是公开接口，_execute 是抽象方法。这种设计模式叫什么？有什么好处？<br>设计模式：工厂方法（Factory Method）<br>好处：封装了对象创建的细节，客户端只需要调用公开接口即可。 符合开闭原则：可以在不修改现有代码的情况下，添加新的智能体实现。 提高了代码的可维护性和可扩展性。<br>（3）在 Config 类中，我们使用了单例模式。请解释什么是单例模式，为什么配置管理需要使用单例模式？如果不使用单例会导致什么问题？<br>核心结论：单例模式（Singleton Pattern）确保一个类只有一个实例，并提供一个全局访问点。在配置管理中使用单例模式可以确保所有组件都使用相同的配置实例，避免配置不一致的问题。<br>如果不使用单例模式，每个组件都可能创建自己的配置实例，导致配置不一致的问题。例如，不同组件使用不同的数据库连接配置，就会导致连接失败或数据不一致的问题。<br>5.<br>（1）BaseTool 类定义了 execute 抽象方法，所有工具都必须实现这个方法。请解释为什么要强制所有工具实现统一的接口？如果某个工具需要返回多个值（如搜索工具返回标题、摘要、链接），应该如何设计？<br>核心结论：强制所有工具实现统一的接口（如 BaseTool 类中的 execute 方法）有以下优势：<br>优点：统一的接口规范：所有工具都遵循相同的调用约定，方便开发者使用和维护。 代码复用：可以将通用的工具逻辑（如参数解析、错误处理）放在 BaseTool 中，避免重复实现。 可维护性：如果需要修改工具的实现，只需要修改 BaseTool 类，而无需修改所有使用该工具的代码。<br>如果某个工具需要返回多个值（如搜索工具返回标题、摘要、链接），可以设计一个数据结构（如字典或自定义类）来封装这些值，然后在 execute 方法中返回这个数据结构。<br>（2）在7.5.3节中实现了工具链（ToolChain）。请设计一个实际的应用场景，需要串联至少3个工具，并画出工具链的执行流程图。<br>核心结论：设计一个实际的应用场景，需要串联至少3个工具的工具链，例如：<br>场景：需要从互联网上搜索相关信息，然后根据搜索结果生成摘要，最后将摘要发送到邮件。<br>工具链：搜索工具（如 Google 搜索）、摘要生成工具（如 OpenAI 的 GPT-3）、邮件发送工具（如 SMTP 协议）。<br>（3）异步工具执行器（AsyncToolExecutor）使用了线程池来并行执行工具。请分析：在什么情况下并行执行工具能带来性能提升？<br>核心结论：在以下情况下，并行执行工具能带来性能提升：<br>场景：需要同时执行多个耗时的工具，例如同时从多个数据源获取数据。<br>优势：并行执行可以利用多核处理器的优势，同时执行多个任务，减少总执行时间。<br>注意事项：并行执行工具时，需要注意工具之间的依赖关系，避免竞态条件和数据不一致问题。<br>6.<br>（1）首先为 HelloAgents 添加一个”流式输出”功能，使得 Agent 在生成响应时能够实时返回中间结果（类似 ChatGPT 用户界面的打字效果）。请设计这个功能的实现方案，说明需要修改哪些类和方法。<br>核心结论：为 HelloAgents 添加流式输出功能，需要修改以下类和方法：<br>类：Agent 基类<br>方法：run 方法，新增一个参数 stream&#x3D;True，用于开启流式输出模式。<br>实现方案：在 run 方法中，当 stream&#x3D;True 时，将响应内容分块返回，而不是一次性返回完整结果。可以使用 yield 关键字实现分块返回。<br>（2）然后为框架添加”多轮对话管理”功能，能够自动管理对话历史、支持对话分支和回溯，你会如何设计？需要新增哪些类？如何与现有的 Message 系统集成？<br>核心结论：为 HelloAgents 添加多轮对话管理功能，需要新增以下类：<br>类：ConversationManager<br>方法：add_message、get_history、get_branch、backtrack<br>与 Message 系统集成：ConversationManager 类可以与 Message 系统集成，将每个用户的消息存储在 Message 类中，并在 ConversationManager 中管理对话历史。<br>（3）最后请为 HelloAgents 设计一个”插件系统”，允许第三方开发者通过插件的方式扩展框架功能（如添加新的 Agent 类型、新的工具类型等），而无需修改框架核心代码。要求画出插件系统的架构图并说明关键接口。<br>核心结论：为 HelloAgents 设计一个插件系统，需要以下架构图和关键接口：<br>架构图<br>关键接口：<br>插件接口（Plugin Interface）：定义了插件需要实现的方法，例如 load_config、register_agent、register_tool 等。<br>插件加载器（Plugin Loader）：负责加载插件代码、初始化插件对象并调用插件接口注册方法。<br>插件管理器（Plugin Manager）：负责管理已加载的插件，提供插件查询、调用等功能。</p>
-
             
         </div>
     </div>
@@ -218,6 +292,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -231,14 +314,6 @@
         <div class="content" v-pre>
             
             <h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-13%20203505.png?raw=true" alt="本地图片"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-13%20203527.png?raw=true" alt="本地图片"></h2><p>这次大语言模型智能体的学习与实践，不仅是一次技术能力的提升，更是一次对 “智能” 本质的探索 —— 智能体的价值不在于 “无所不能”，而在于 “在已知边界内，高效连接推理与行动，持续逼近目标”。而亲手构建的过程，正是理解这一本质、并不断拓展其可能空间的最佳路径。</p>
-<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="1-ReAct、Plan-and-Solve-和-Reflection"><a href="#1-ReAct、Plan-and-Solve-和-Reflection" class="headerlink" title="1.ReAct、Plan-and-Solve 和 Reflection"></a>1.ReAct、Plan-and-Solve 和 Reflection</h2><p>（1）本质区别：<br>ReAct 模式：边想边做的探索者<br>阐述 ReAct“边想边做，边做边学” 的核心思想，以找物品为例，说明其想法、行动、观察的循环过程，总结其灵活应变但缺乏长期目标把控的特点。<br>Plan-and-Solve 模式：谋定而后动的规划者<br>解释该模式先规划再执行的流程，以复杂任务为例，体现规划调整过程，得出其适合多步骤、强依赖任务，但应对突发情况灵活性欠佳的结论。<br>Reflection 模式：自我反思的进步者<br>介绍其在执行中不断评估过往行为优化后续决策的特点，以写作、解题等场景为例说明基础反思过程，以及带强化学习的反思机制如何打分和调整策略。<br>（2）设计智能家居助手<br>对比三种范式，ReAct虽能实时响应但缺乏整体规划。Reflection 主要用于优化结果而非直接控制，Plan-and-Solve 适合复杂任务规划与调整，更符合助手需求。<br>因为：如能对设备控制制定完整计划，执行中根据情况调整，可满足多设备协同和按用户习惯自动调节。<br>（3）构建以 Plan-and-Solve 为主体，融入 ReAct 处理突发情况，利用 Reflection 优化决策的架构，阐述各部分工作流程和交互方式。像平常家庭管理用Plan-and-Solve，家庭成员出现生命安全或者家内煤气超标，断电可以用ReAct，再利用Reflection优化下一步行动。</p>
-<h2 id="2-正则表达式来解析大语言模型的输出"><a href="#2-正则表达式来解析大语言模型的输出" class="headerlink" title="2.正则表达式来解析大语言模型的输出"></a>2.正则表达式来解析大语言模型的输出</h2><p>（1）核心脆弱性<br>格式敏感：严格依赖 Thought:「Action:<code> 等固定标识符，模型输出少空格、多标点或换行会直接失效。 语义鲁棒性差：仅匹配字符串形式，无法理解模型输出的语义逻辑，比如 Action 参数缺失却符合正则格式时会误解析。 扩展性不足：新增工具或修改输出结构时，需重新编写正则表达式，维护成本随场景复杂度上升。 典型失败场景 （2）更鲁棒的输出解析方案 模型输出格式变体：如 Thought - xxxx「Action：xxxx」（符号替换）、多段换行分隔 Thought 和 Action。 内容嵌套干扰：Action 参数中包含 :「}</code> 等正则关键字符，导致匹配截断或全量失败。<br>逻辑不完整输出：模型仅生成 Thought 未生成 Action，或 Action 缺少必要参数，正则仍会提取残缺信息。<br>多轮交互累积误差：多轮对话中模型输出格式逐渐偏移，正则无法自适应调整。</p>
-<h2 id="3-工具调用"><a href="#3-工具调用" class="headerlink" title="3.工具调用"></a>3.工具调用</h2><p>尚在学习</p>
-<h2 id="4-Plan-and-Solve-范式将任务分解为”规划”和”执行”两个阶段。"><a href="#4-Plan-and-Solve-范式将任务分解为”规划”和”执行”两个阶段。" class="headerlink" title="4.Plan-and-Solve 范式将任务分解为”规划”和”执行”两个阶段。"></a>4.Plan-and-Solve 范式将任务分解为”规划”和”执行”两个阶段。</h2><p>（1）如何设计一个”动态重规划”机制？<br>反馈驱动：以执行结果（成功 &#x2F; 失败、实际输出 vs 预期目标）作为重规划触发信号。<br>最小修改：仅调整受影响的步骤，不重构整个计划，平衡效率与稳定性。<br>目标守恒：重规划后需保证最终目标不变，避免偏离核心任务。<br>（2）Plan-and-Solve 与 ReAct:在处理”预订一次从北京到上海的商务旅行（包括机票、酒店、租车）”这样的任务时，哪种范式更合适？为什么？<br>Plan-and-Solve 范式更合适。核心原因是该任务的 “多步骤强依赖、目标明确、需全局统筹” 特性，与 Plan-and-Solve 的全局规划优势高度适配，而 ReAct 的 “边想边做” 模式易出现逻辑混乱或资源浪费。<br>（3）尝试设计一个”分层规划”系统:先生成高层次的抽象计划，然后针对每个高层步骤再生成详细的子计划。这种设计有什么优势？<br>提升规划效率：解释分层规划通过减少不必要细节，快速确定关键步骤，节省时间精力，提高规划速度。<br>增强灵活性与适应性：阐述面对变化时，分层规划只需调整特定层次计划，无需全盘修改，能更好应对突发情况。<br>提高规划质量：说明分层规划从宏观到微观思考，全面考虑各层次关系，使计划更合理、全面、科学。<br>便于团队协作与沟通：分析分层规划按层次分配任务，成员明确职责，各层次计划成为沟通协作依据，减少冲突误解。</p>
-<h2 id="5-Reflection-的”执行-反思-优化”循环机制。"><a href="#5-Reflection-的”执行-反思-优化”循环机制。" class="headerlink" title="5.Reflection 的”执行-反思-优化”循环机制。"></a>5.Reflection 的”执行-反思-优化”循环机制。</h2><p>（1）如果使用两个不同的模型会带来什么影响？<br>强大模型用于反思的优势 快速模型用于执行的优势 模型间的协作流程与交互机制<br>（2）Reflection 机制的终止条件是”反馈中包含无需改进”或”达到最大迭代次数”。这种设计是否合理？能否设计一个更智能的终止条件？<br>现有设计基本合理但不够智能，更优方案需结合 “改进价值 + 反馈质量 + 迭代效果” 多维度判断。以 “改进价值是否为正” 为核心，结合反馈质量、迭代趋势、资源约束，形成复合终止规则。</p>
-<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>（1）ReAct 提示词和的 Plan-and-Solve 提示词，它们显然存在结构设计上的明显不同，这些差异是如何服务于各自范式的核心逻辑的？<br>两者结构差异精准匹配各自 “动态交互” 与 “先规划后执行” 的核心逻辑，直接决定任务推进方式。<br>（2）Reflection 提示词中，我们使用了”你是一位极其严格的代码评审专家”这样的角色设定。尝试修改这个角色设定（如改为”你是一位注重代码可读性的开源项目维护者”），观察输出结果的变化，并总结角色设定对智能体行为的影响。<br>角色设定为智能体提供了 “行为锚点”，明确了任务中的优先级排序。<br>角色的专业背景决定了评判维度，比如 “评审专家” 侧重 “纠错”，“维护者” 侧重 “协作”。<br>角色的语气特质会传递给智能体，影响输出的沟通风格</p>
-<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p>（1）采用「Plan-and-Solve + Reflection」组合范式作为核心架构，工具需覆盖订单查询、规则匹配、邮件发送三类核心需求，提示词通过 “政策锚定 + 语气约束 + 反思机制” 平衡公司利益与用户友好，风险则通过技术校验、人工兜底等方式降低。<br>（2）订单与物流查询工具<br>功能描述：对接公司订单系统，输入用户 ID &#x2F; 订单号，返回订单状态（未发货 &#x2F; 已发货 &#x2F; 已签收）、付款金额、下单时间、物流轨迹等关键信息。<br>核心作用：为 “是否符合退款条件” 提供数据支撑（如 “未发货订单可直接退款”“已签收超 7 天需审核”）。<br>    退款政策规则匹配工具<br>功能描述：内置公司退款政策库（结构化存储，如 “食品类未开封 7 天内可退”“定制商品不支持退款”），输入 “退款理由 + 订单信息”，输出政策匹配结果及置信度。<br>核心作用：替代人工检索政策，确保决策一致性，同时输出置信度触发反思机制。<br>    邮件自动生成与发送工具<br>功能描述：根据 “退款结果（批准 &#x2F; 拒绝 &#x2F; 待复核）+ 订单信息 + 政策依据”，调用预设模板生成得体邮件，支持自动发送至用户预留邮箱，同时记录发送日志。<br>核心作用：标准化回复格式，保证语气友好，减少人工操作成本。<br>（3）利益平衡：通过 “决策约束” 锁定公司政策底线，避免经济损失；通过 “语气约束” 和 “替代方案” 降低用户不满，维护品牌口碑。<br>反思机制：明确置信度阈值和反思方向，避免模糊决策导致的纠纷。<br>（4）决策错误风险：对所有决策结果加 “人工抽检” 机制（抽检比例初期设为 30%，后续根据准确率调整）； 定期更新政策匹配工具的规则库，同步公司政策变化；记录错误案例，用于优化提示词和模型训练<br>用户体验风险：提示词中嵌入多组语气模板（如安抚型、解释型），根据场景自动匹配；邮件生成后增加 “语气校验” 模块，过滤生硬表述；收集用户反馈，迭代回复模板</p>
-
             
         </div>
     </div>
@@ -256,6 +331,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -269,21 +353,6 @@
         <div class="content" v-pre>
             
             <h1 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容"></a>学习内容</h1><p>介绍 Transformer 为机器翻译设计并遵循编码器 - 解码器架构的起源。<br>阐述编码器理解输入句子和解码器生成目标句子的任务分工。<br>分析编码器读取输入词元生成上下文向量表示的功能，阐述解码器参考前文并咨询编码器结果生成下一个词的过程，说明两者协作实现翻译任务的机制。</p>
-<h2 id="从自注意力到多头注意力"><a href="#从自注意力到多头注意力" class="headerlink" title="从自注意力到多头注意力"></a>从自注意力到多头注意力</h2><p>自注意力机制的原理与计算：<br>解释自注意力机制允许模型兼顾句子中所有词并分配注意力权重的原理，阐述查询、键、值向量的生成及计算注意力得分、归一化和加权求和的过程。<br>多头注意力机制的设计与优势：<br>介绍多头注意力将 Q、K、V 向量切分并独立计算注意力的设计，分析其让模型关注多种关系和不同位置信息的优势，展示其结构示意图。<br>多头注意力的实现与代码解析：<br>展示多头注意力机制在 PyTorch 中的实现代码，解析线性变换、注意力计算、头部分割与合并等关键步骤，说明代码的功能和逻辑。</p>
-<h2 id="前馈神经网络"><a href="#前馈神经网络" class="headerlink" title="前馈神经网络"></a>前馈神经网络</h2><p>前馈网络的结构与功能：<br>阐述前馈网络在 Transformer 层中紧跟多头注意力子层的结构，分析其独立作用于序列中每个词元向量并提取高阶特征的功能。<br>前馈网络的计算过程与参数设置：<br>解释前馈网络由两个线性变换和 ReLU 激活函数组成的计算过程，分析第一个线性层扩大维度和第二个线性层映射回原维度的参数设置，说明其对特征学习的作用。<br>前馈网络的代码实现与分析：<br>展示前馈网络在 PyTorch 中的实现代码，解析线性层定义、激活函数应用和 Dropout 操作的代码逻辑，说明代码如何实现前馈网络的功能。</p>
-<h2 id="残差连接与层归一化"><a href="#残差连接与层归一化" class="headerlink" title="残差连接与层归一化"></a>残差连接与层归一化</h2><p>残差连接的作用与原理：<br>介绍残差连接将子模块输入加到输出以解决梯度消失问题的作用，分析其在反向传播中让梯度绕过子模块直接传播的原理，说明对模型训练的帮助。<br>层归一化的原理与优势：<br>阐述层归一化对单个样本所有特征进行归一化的原理，分析其解决内部协变量偏移问题和稳定输入分布的优势，说明对模型收敛速度和稳定性的提升。</p>
-<h2 id="位置编码"><a href="#位置编码" class="headerlink" title="位置编码"></a>位置编码</h2><p>位置编码的必要性：<br>分析 Transformer 自注意力机制忽略词元顺序信息的问题，阐述引入位置编码为词元嵌入向量添加位置信息的必要性，说明对模型理解句子顺序的重要性。<br>位置编码的原理与计算：<br>介绍用正弦和余弦函数生成位置向量的原理，解释公式中位置、维度索引和词嵌入向量维度的含义，说明位置编码的计算过程。<br>位置编码的实现与效果：<br>展示位置编码在 PyTorch 中的实现代码，解析位置编码矩阵生成、注册和添加到输入向量的步骤，分析位置编码对模型处理序列数据的效果提升。</p>
-<h3 id="本次学习成功看懂代码，并学会改变利用，希望再接再厉！"><a href="#本次学习成功看懂代码，并学会改变利用，希望再接再厉！" class="headerlink" title="本次学习成功看懂代码，并学会改变利用，希望再接再厉！"></a>本次学习成功看懂代码，并学会改变利用，希望再接再厉！</h3><h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="1"><a href="#1" class="headerlink" title="1 "></a>1 <img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-12%20112243.png?raw=true" alt="本地图片"></h2><p>一、马尔可夫假设的含义<br>马尔可夫假设是 N-gram 模型的基础前提，核心含义是：一个词的出现概率仅取决于它前面紧邻的 N-1 个词，与更早的词无关。<br>比如 2-gram（二元模型）假设当前词概率只依赖前 1 个词，3-gram（三元模型）依赖前 2 个词。<br>本质是通过 “局部依赖简化”，将复杂的全局语言依赖关系转化为可计算的局部窗口依赖，降低建模难度。<br>二、N-gram 模型的根本性局限<br>上下文窗口固定，无法捕捉长距离依赖：N 值一旦确定，只能关注紧邻的 N-1 个词，无法处理跨多个词的语义关联（如长句中前后指代、逻辑呼应）。<br>数据稀疏问题严重：N 越大，需要的训练数据量呈指数级增长，大量 N-gram 组合在语料中从未出现，导致概率估计不准确。<br>泛化能力差：仅依赖词的表面共现，无法捕捉词的语义相似性（如 “手机” 和 “电话” 语义相近，但 N-gram 会视为完全不同的上下文）。<br>参数规模庞大：N 增大时，模型参数数量随词汇表大小呈指数增长，存储和计算成本极高。<br>三、RNN&#x2F;LSTM 如何克服 N-gram 局限<br>核心思路：建模序列动态依赖<br>不再局限于固定 N-1 窗口，而是通过 “隐藏状态” 累计前文信息，理论上可捕捉任意长度的上下文依赖。<br>隐藏状态会随序列推进不断更新，将历史信息传递到当前步，替代 N-gram 的固定窗口。<br>各自优势<br>RNN（循环神经网络）<br>优势：首次实现序列数据的 “记忆传递”，突破 N-gram 的固定窗口限制，参数规模远小于 N-gram（与词汇表大小线性相关）。<br>适用于短序列场景，结构简单、易于理解和实现。<br>LSTM（长短期记忆网络）<br>优势：通过门控机制（输入门、遗忘门、输出门）解决 RNN 的 “梯度消失 &#x2F; 爆炸” 问题，能有效捕捉长序列中的关键依赖（如长句前后语义关联）。<br>相比 RNN，对长文本的建模稳定性更强，是早期处理长序列语言任务的核心模型。</p>
-<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><ol>
-<li>自注意力机制：让每个 token 关注全局信息，动态分配权重，核心是 “全局依赖 + 并行计算”；</li>
-<li>Transformer 并行性：自注意力无顺序依赖，RNN 有前序依赖；位置编码解决自注意力的 “顺序失忆” 问题；</li>
-<li>Decoder-Only 架构：适合自回归生成，数据简单、结构简洁、多任务能力强，成为大模型主流；</li>
-</ol>
-<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p> 子词分词（BPE）：平衡词汇表大小和语义表达，解决字符级的低效和单词级的 OOV 问题，是大模型输入处理的核心。</p>
-<h2 id="4"><a href="#4" class="headerlink" title="4 "></a>4 <img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-12%20124349.png?raw=true" alt="本地图片"></h2><p>   若预算有限、隐私要求高、需深度定制，优先选择 开源模型本地部署；<br>• 若追求高性能、低运维成本、快速上线，可选择 闭源模型 API；<br>• 最实用的方案是 混合架构：用开源模型覆盖常规场景，闭源模型处理复杂任务，既控制成本和隐私，又保证用户体验。</p>
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>  缓解大语言模型幻觉是一个系统性工程，单一方法难以完全解决问题。实际应用中，建议结合多种策略（如 RAG + 工具调用 + 幻觉检测），根据具体任务场景选择最合适的组合。未来，随着研究的深入，模型的事实准确性将不断提升，为更可靠的 AI 应用奠定基础。</p>
-<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>  设计一个优秀的论文辅助阅读智能体是一个系统工程，需要在模型选择、提示词工程、长文本处理和事实性保障等多个维度进行精心设计。通过采用强大的基座模型、结构化的提示策略、分块融合的长文本处理流程以及多重事实校验机制</p>
-
             
         </div>
     </div>
@@ -301,6 +370,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -313,14 +391,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="学习经验总结"><a href="#学习经验总结" class="headerlink" title="学习经验总结"></a>学习经验总结</h1><p>核心收获：1）智能体的本质是 “感知 - 思考 - 行动 - 观察” 闭环，核心是 “自主性”；2）从传统智能体到 LLM 驱动新范式，按决策架构、时间反应性、知识表示可精准分类；3）LLM 智能体实现核心是 “提示工程 + 工具调用 + 循环迭代”，PEAS 模型可清晰定义任务环境。<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-11-10%20234920.png?raw=true" alt="本地图片"></p>
-<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="智能体判断与类型分析"><a href="#智能体判断与类型分析" class="headerlink" title="智能体判断与类型分析"></a>智能体判断与类型分析</h2><p>• case A：不属于，仅具算力，无感知、行动能力和目标。<br>• case B：属于，反应式 + 基于模型的反射智能体，传感器感知障碍物，执行器快速避障，目标是安全行驶。<br>• case C：属于，规划式 + 学习型智能体，规划多步棋路，通过强化学习进化，目标是赢棋。<br>• case D：属于，混合式 + 神经符号主义智能体，即时回应 + 工具查询，动态解决投诉，目标是安抚用户。</p>
-<h2 id="智能健身教练的-PEAS-模型与环境特性"><a href="#智能健身教练的-PEAS-模型与环境特性" class="headerlink" title="智能健身教练的 PEAS 模型与环境特性"></a>智能健身教练的 PEAS 模型与环境特性</h2><p>• PEAS 模型：性能度量（目标达成率、安全性、满意度）；环境（用户身体状态、运动场景、设备反馈）；执行器（语音指导、计划生成、饮食建议）；传感器（可穿戴设备、用户交互接口）。<br>• 环境特性：部分可观察、随机性、动态性、序贯性。</p>
-<h2 id="售后退款方案对比与混合方案"><a href="#售后退款方案对比与混合方案" class="headerlink" title="售后退款方案对比与混合方案"></a>售后退款方案对比与混合方案</h2><p>• 方案 A（Workflow）：优点（高效、可解释、成本低）；缺点（刚性强、适配差），适合标准化场景。<br>• 方案 B（Agent）：优点（灵活、个性化、自学习）；缺点（开发难、黑箱、成本高），适合复杂场景。<br>• 方案 C（混合）：常规场景用 Workflow，例外 &#x2F; 复杂场景用 Agent，人工兜底 + 反馈优化。</p>
-<h2 id="旅行助手功能扩展"><a href="#旅行助手功能扩展" class="headerlink" title="旅行助手功能扩展"></a>旅行助手功能扩展</h2><p>• 记忆功能：新增偏好存储模块，将偏好嵌入 TAO 循环的 prompt。<br>• 售罄备选：工具新增门票查询，识别售罄后重新调用工具推荐同类型景点。<br>• 3 次拒绝调整：记录拒绝次数，触发反思，询问偏好或切换推荐类型。</p>
-<h2 id="医疗诊断助手的系统-1-与系统-2-协同"><a href="#医疗诊断助手的系统-1-与系统-2-协同" class="headerlink" title="医疗诊断助手的系统 1 与系统 2 协同"></a>医疗诊断助手的系统 1 与系统 2 协同</h2><p>• 系统 1：快速症状匹配、危险信号识别、基础信息采集。<br>• 系统 2：复杂症状分析、病史整合、差异化诊断。<br>• 协同：系统 1 初筛→简单情况直接输出，复杂 &#x2F; 危险情况转系统 2→系统 1 转化结果输出。</p>
-<h2 id="智能体局限分析"><a href="#智能体局限分析" class="headerlink" title="智能体局限分析"></a>智能体局限分析</h2><p>• 幻觉原因：数据噪声、模型追求连贯、缺乏实时核查。<br>• 无循环限制风险：无限循环、资源耗尽、任务超时。<br>• 智能评估：需综合自主性、灵活性、鲁棒性、效率等，仅准确率不足。</p>
-
+            <h1 id="学习经验总结"><a href="#学习经验总结" class="headerlink" title="学习经验总结"></a>学习经验总结</h1><p>核心收获：1）智能体的本质是 “感知 - 思考 - 行动 - 观察” 闭环，核心是 “自主性”；2）从传统智能体到 LLM 驱动新范式，按决策架构、时间反应性、知识表示可精准分类；3）LLM 智能体实现核心是 “提示工程 + 工具调用 + 循环迭代”，PEAS 模型可清晰定义任务环境。</p>
             
         </div>
     </div>
@@ -338,6 +409,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -351,10 +431,6 @@
         <div class="content" v-pre>
             
             <h1 id="第一次接触markdown"><a href="#第一次接触markdown" class="headerlink" title="第一次接触markdown"></a>第一次接触markdown</h1><p>第一次来到这里，听到学长说的还有教学中的md，我是茫然的，这是什么东西啊？？<br>当我去了解了一下，我逐渐开始明白这个东西有多么好用</p>
-<h2 id="对md的理解"><a href="#对md的理解" class="headerlink" title="对md的理解"></a>对md的理解</h2><p>让作者专注文字而非排版，通过轻量级符号实现高效格式化文档。</p>
-<h3 id="方便性"><a href="#方便性" class="headerlink" title="方便性"></a>方便性</h3><p>1. 学习成本低：语法简单易记<br>2. 编写效率高：键盘不离开主键区<br>3. 跨平台兼容：纯文本通用性<br>4. 转换灵活：支持导出多种格式<br>5. 版本控制友好：适合Git管理</p>
-<h4 id="对新手十分友好"><a href="#对新手十分友好" class="headerlink" title="对新手十分友好"></a>对新手十分友好</h4><p>最打动新手的应该是：五分钟就能完成第一篇格式化文档。这需要拆解三个层面：一是语法记忆量极小（10个符号覆盖90%场景），二是即时反馈的成就感（输入符号后实时预览效果），三是容错率高（漏空格也能被纠正）。</p>
-
             
         </div>
     </div>
@@ -372,6 +448,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/life/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                生活
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -385,11 +470,6 @@
         <div class="content" v-pre>
             
             <h1 id="我的入宅番"><a href="#我的入宅番" class="headerlink" title="我的入宅番"></a>我的入宅番</h1><p>我的入宅经历还算坎坷，看的第一部番是Charlotte,当时是小学，竟然看了一个开头就退出结束了！！！第二次看还是没看进去。。。<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/ch1.jpg?raw=true" alt="本地图片"><br>但是我与Charlotte的缘分真的到此结束了吗    </p>
-<h1 id="我的第二次接触？"><a href="#我的第二次接触？" class="headerlink" title="我的第二次接触？"></a>我的第二次接触？</h1><p>在我没有手机的情况下，我打开了电视，找到了这部番<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/gw1.jpg?raw=true" alt="本地图片"><br>激起我对动漫美好的向往</p>
-<h1 id="再次相遇"><a href="#再次相遇" class="headerlink" title="再次相遇"></a>再次相遇</h1><p>再一次打开B站，看到追番列表，我又看到了Charlotte,这一次终于看完哩，从此发不可收拾。</p>
-<h1 id="我的青春恋爱物语果然有问题！"><a href="#我的青春恋爱物语果然有问题！" class="headerlink" title="我的青春恋爱物语果然有问题！"></a>我的青春恋爱物语果然有问题！</h1><p>这部番对于我来说造成了很大的影响，开篇即是王炸<br><img src="https://github.com/Yuisuki521/BlogImgs/blob/main/cw.jpg?raw=true" alt="本地文件"><br>青春是罪恶的谎言，讴歌青春的人们总是欺骗自己，在朋友的态度非常肯定的环境下，面对他们青春的两个字，无论是什么样的普遍认识，都扭曲了社会的准则。对他们来说，把谎言作为秘密的犯罪，即使失败了，也不只是全部青春的调味料。如果说这是青春的象征的话，即使是脸书失败的人，也可以说是美食青春吧。但是他们认为他们不会去。这是他们的自私崇拜吗。让我们一起来解释一下，青春的傻瓜们。我们爆炸吧！<br>有点中二啊，问题不大，第一篇我也不知道写啥<br>这部番对我影响很大，感觉做事要冷静，话可以减少，权衡利弊但也要灌入情感</p>
-<h1 id="感谢动漫"><a href="#感谢动漫" class="headerlink" title="感谢动漫"></a>感谢动漫</h1><p>动漫带给我很多感悟和快乐，造就了我的一些性格<br><img src="https://raw.githubusercontent.com/Yuisuki521/BlogImgs/637f013d18b4e1cdcb07efd2728168d19aa0af07/Yui.jpg" alt="本地文件"></p>
-
             
         </div>
     </div>
@@ -407,6 +487,15 @@
     </a>
     <div class="category-and-date">
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -420,19 +509,6 @@
         <div class="content" v-pre>
             
             <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
             
         </div>
     </div>
@@ -488,7 +564,7 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2025 Yuisuki&#39;s home
+            2022 - 2026 Yuisuki&#39;s home
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
