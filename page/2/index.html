@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>心理健康助手+ai Day1 | Yuisuki&#39;s home</title>
+    <title>Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -42,9 +42,7 @@
 
 
 
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -182,17 +180,39 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>心理健康助手+ai Day1</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/8/14
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Yuisuki&#39;s home</h1>
+                <h3>To Be Continued</h3>
+                <h5>Love, games, and anime</h5>
+            </div>
         </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2025/09/20/hello-world/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
         
         <span class="category">
             <a href="/categories/study/">
@@ -203,24 +223,73 @@
             </a>
         </span>
         
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/9/20
+        </span>
+        
         
     </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2025/09/20/hello-world/" class="go-post">阅读全文</a>
+</div>
+
+
+        <div class="page-current">
     
-    <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第一天，是我的第一个项目</p>
-<span id="more"></span>
-<h1 id="1-nvm和node版本"><a href="#1-nvm和node版本" class="headerlink" title="1.nvm和node版本"></a>1.nvm和node版本</h1><p>需要用到node的24版本，所以学习用到了nvm，可以调节node的不同版本，node也十分方便管理这些版本，用到了一些基本命令像<br>nvm list<br>nvm install 24<br>nvm use 24</p>
-<h1 id="2-vite脚手架工具"><a href="#2-vite脚手架工具" class="headerlink" title="2.vite脚手架工具"></a>2.vite脚手架工具</h1><p>vue3需要依赖脚手架工具，这里我学习用到了vite<br>npm create vite@latest快速创造项目</p>
-<h1 id="3-创造管理员页面"><a href="#3-创造管理员页面" class="headerlink" title="3.创造管理员页面"></a>3.创造管理员页面</h1><h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h3><p>使用组件库element plus，安装后引入，考虑到管理员和使用者的双页面，所以定义路由时需要将两个板块分开，认识并使用vue-router插件，这里使用4.0版本<br>安装npm install <a href="mailto:&#118;&#117;&#101;&#x2d;&#114;&#111;&#117;&#x74;&#101;&#114;&#64;&#x34;&#46;&#54;&#46;&#52;">vue-router@4.6.4</a>。</p>
-<h3 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h3><p>创建router文件夹，其下创建index.js文件引入vue-router，使用history模式，并创建后台管理管理路由backendroutes，backendroutes创建集合，主路由为&#x2F;back，使用嵌套模式，为了引入backendlayout(子路由先不动)<br>在components文件夹下创建backendlayout.vue，在index.js文件中引入backendlayout.vue<br>创建对象接收创造的router，并导出，在入口文件中引入router并挂载进去，在backendlayout文件使用router标签<br>(遇到@服务问题，找到vite配置文件，使用resolve进行路径拼接)<br>在elementplus中找到合适框架加入到backendlayout，这里使用ai将引入的框架进行调整，达到填充合适并美观的样子<br>今天的进度如图所示<br><img src="https://github.com/Yuisuki521/Yuisuki521.github.io/blob/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-08-14%20214938.png?raw=true" alt="本地图片"></p>
+    <a class="page-num" href="/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">2</span>
+    
+    
+    
+    
+</div>
 
     </div>
     
-    
-    
-    
-    
-    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" alt="avatar" />
+        </div>
+        <div class="name">Yuisuki521</div>
+        <div class="description">
+            <p>woooo~<br>qwq</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
     
 </div>
 
@@ -252,12 +321,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>
