@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>心理健康助手-ai-Day5 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day6 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -184,26 +184,23 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>心理健康助手-ai-Day5</h1>
+        <h1>心理健康助手-ai-Day6</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/8/18
+            2026/8/20
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第五天，登录管理员账号跳转后台和知识页面的内容列表。</p>
-<span id="more"></span>
-<h1 id="1-管理员登陆页面的跳转"><a href="#1-管理员登陆页面的跳转" class="headerlink" title="1.管理员登陆页面的跳转"></a>1.管理员登陆页面的跳转</h1><p>在使用管理员账号登录时，后端反馈roleType&#x3D;2,对应后台账号，需要做判断，根据用户角色决定跳转路径，先拿到userinfo的userType，值为2时，跳转进后台页面，在login.vue中引入vue-router，创建实例并调用routerpush进&#x2F;back&#x2F;dashboard,else为用户页面先预留。</p>
-<h1 id="2-内容的列表部分的功能实现"><a href="#2-内容的列表部分的功能实现" class="headerlink" title="2.内容的列表部分的功能实现"></a>2.内容的列表部分的功能实现</h1><p>form表单中的数据从原先内容固定变为调用后端接口，在knowledge.vue中，分类表单中的option删除，拿到获取分类的接口，为get请求，在定义api的文件下，创建获取分类的接口，并引入进knowledge.vue，要在页面加载完成之后调用这个这个接口拿分类数据，需要在Mounted生命周期中调用api，确认可以拿到formItem的数据后，这里可以做分类映射数据（categoryMap）和分类列表数据（categories）做一个保存，做的映射关系用以在列表中使用，接下处理formItem就可以拿到formItem，拿到分类这项对应数组索引为1，添加options并把categories.vue的数据给options，在formItem中增加了一个叫状态的下拉列表，类型为select，因为这个是固定的数据，所以直接用options写下。</p>
-<h1 id="3-查询和重置"><a href="#3-查询和重置" class="headerlink" title="3.查询和重置"></a>3.查询和重置</h1><p>点击查询，需要获取的是表单中查询的数据，然后调列表的接口，定义列表接口&#x2F;articlePage,是get请求，携带参数params，并把列表的接口引入，列表接口要在页面首次加载时候要请求，点击查询的时候要请求，点击分页的时候要请求，要对请求列表进行封装，接口请求写进之前的handleSearch方法，这个方法本身就为获取列表数据的方法，在此方法中调用此接口传入数据，数据包含两部分，分为用户可选择部分的业务参数和列表的分页参数，定义时候应该区分开，第一个为分特参数起名为pagination，有currentPage size和total，要把两个参数整合在一起到params，通过扩展运算符把业务参数和分页参数合并，调用的时候直接传params，最后在mounted中再调用handleSearch()。<br>列表数据已经拿到，开始实现列表，在el-plus找到合适组件使用，数据使用调用接口的数据，定义列表数据起名为tableData用ref定义，在handleSearch中，需要对data数据进行解构将records和total拿到，把records数据赋给tableData，把tableData传给el-table的date，并可以对table增加样式，添加el-table-column，内容拿到数据子组件转递的数据，.row可以拿到当前行的数据，.title可以拿到文章标题的数据<br>分类列时为.categoryId，因为返回的是category，这个category对应的是一个id,这个id需要做映射处理，之前在onMounted中定义过一个categoryMap，key是id值是categoryName，所以这个.categoryId可以用categoryMap[scope.row.categoryId]<br>操作列需要对状态进行判断，编辑按钮先做出样式，发布按钮需要看后端返回状态进行判断，通过v-if进行判断，状态为0或2时候属于草稿状态可以发布，下线是状态1的时候处于下线，删除按钮先做样式，将整体样式进行美化。</p>
-<h1 id="4-新增按钮页面的弹出关闭功能"><a href="#4-新增按钮页面的弹出关闭功能" class="headerlink" title="4 新增按钮页面的弹出关闭功能"></a>4 新增按钮页面的弹出关闭功能</h1><p>首先封装组件ArticleDialog.vue，基础格式写出，这里使用el-dialog组件，弹窗打开和封闭使用v-model传入打开和关闭的属性，属性需要由外部传入，关闭回调会触发handleClose方法，定义方法。<br>knowledge.vue引入ArticleDialog组件，写进去，传入属性使用v-model添加自定义属性mdelValue，起名为dialogVisible，通过ref定义dialogVisible初始值为false，把子组件的defineProps用props接收的同时，把其中的visible改为modelValue，让他成为一个布尔值，，给新增按钮增加点击事件，当点击时为true，发现退出页面发生问题，因为子组件不能修改props，在子组件定义一个计算属性，对父组件进行状态监听，当状态变化时再修改，定义一个dialogVisible&#x3D;computed中有get和set两个方法，定义set中的emit，获取时直接拿props的属性，修改时当修改的是状态属性，就是修改dialogVisible的属性时，会触发set方法就会触发update:modeValue传给父组件再修改，这时弹窗的弹出关闭功能成功。<br>对页面内容使用el-form，对model的formData定义，新增功能表单数据不需要传id,其他进行定义，引入输入框，给输入框加一些样式。mounted生命周期 .then和async和await用法 ref和reactive props<br>今天的进度如图所示<br><img src="/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day5/2026-08-18%20181102.png"><br><img src="/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day5/2026-08-18%20181115.png"></p>
+        <h1 id="1-新增文章功能的部分功能"><a href="#1-新增文章功能的部分功能" class="headerlink" title="1.新增文章功能的部分功能"></a>1.新增文章功能的部分功能</h1><p>打印categories.value，发现是一个数组对象的结构，需要把数据传递进ArticleDialog组件中，定义属性，做出文章摘要部分和标签，标签为固定数据，直接写好option,标签框可多选（multiple），过滤（filterable）和搜索。</p>
+<h1 id="2-上传封面功能"><a href="#2-上传封面功能" class="headerlink" title="2.上传封面功能"></a>2.上传封面功能</h1><p>新建表单域，新建div叫cover-upload，使用el-upload组件，用户上传的封面需要后台审核，上传前定义方法beforeuUload,上传请求方法叫做handleUploadRequest,上传格式image；内部中有未上传和已上传两个部分，已上传时做一个默认效果，需要定义一个imageUrl，默认时为空，上传成功后需要把上传成功地址赋值给他，这时可以对默认效果做一个判断，如果说不存在，显示默认，已存在显示图片地址。上传前针对上传的文件进行校验，将这个file的type提取出来，用.startWith的方法判断是否为文件类型，用isImage接收，不存在给提示并返回false，还要限制一下文件的大小，如果两个都没问题返回为true，接下来把文件发送给后端，先定义接口，定义方法uploadFile传进文件及文件参数，在方法中创建formData对象，在formData中放入文件file businessType businessInfo和businessField,再调用接口，为post请求。<br>引入接口，来到第二个方法handleUploadRequest，解构file文件，传入文件对象，传bussinessId，也就是一个唯一的标识，用UUID生成传给businessId，传进businessId，拿到value值，用变量叫做fileRes存一下，打印结果，测试时，成功调用接口，但是businessId未成功传递，为了解决问题，只留打印businessId部分，发现传递本身即为字符串，把这个value去掉，这时成功拿到文件地址filePath相对路径,新建配置文件夹config，新建index.js，定义路径fileBaseUrl，将这个地址引入，把图片进行路径完整拼接，将相对路径赋值给formData.coverImage，最后做一个样式效果，定义一个移除封面的方法。</p>
+<h1 id="3-Editor富文本"><a href="#3-Editor富文本" class="headerlink" title="3.Editor富文本"></a>3.Editor富文本</h1><p>使用插件wangEditor，根据介绍下载和引入，创建组件RichTextEditor.vue，编辑样式，使用时引入进文件，定好位置后用表单域包裹，编辑属性内容，这里需要添加一个change事件，在用户输入时，把用户输入内容在父组件获取，定义方法handleContentChange，定义方法，创建时对外暴露了create方法，有初始化内容统计，检查字体菜单，判断字体菜单最后触发创建成功。<br>今天的进度如图所示<br><img src="/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day6/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-08-20%20212413.png"></p>
 
     </div>
     
