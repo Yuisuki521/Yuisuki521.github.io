@@ -198,9 +198,11 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="1-新增文章功能的部分功能"><a href="#1-新增文章功能的部分功能" class="headerlink" title="1.新增文章功能的部分功能"></a>1.新增文章功能的部分功能</h1><p>打印categories.value，发现是一个数组对象的结构，需要把数据传递进ArticleDialog组件中，定义属性，做出文章摘要部分和标签，标签为固定数据，直接写好option,标签框可多选（multiple），过滤（filterable）和搜索。</p>
+        <p>今天是心理健康助手＋ai项目的第六天，做了新增按钮的其他功能</p>
+<span id="more"></span>
+<h1 id="1-新增文章功能的部分功能"><a href="#1-新增文章功能的部分功能" class="headerlink" title="1.新增文章功能的部分功能"></a>1.新增文章功能的部分功能</h1><p>打印categories.value，发现是一个数组对象的结构，需要把数据传递进ArticleDialog组件中，定义属性，做出文章摘要部分和标签，标签为固定数据，直接写好option,标签框可多选（multiple），过滤（filterable）和搜索。</p>
 <h1 id="2-上传封面功能"><a href="#2-上传封面功能" class="headerlink" title="2.上传封面功能"></a>2.上传封面功能</h1><p>新建表单域，新建div叫cover-upload，使用el-upload组件，用户上传的封面需要后台审核，上传前定义方法beforeuUload,上传请求方法叫做handleUploadRequest,上传格式image；内部中有未上传和已上传两个部分，已上传时做一个默认效果，需要定义一个imageUrl，默认时为空，上传成功后需要把上传成功地址赋值给他，这时可以对默认效果做一个判断，如果说不存在，显示默认，已存在显示图片地址。上传前针对上传的文件进行校验，将这个file的type提取出来，用.startWith的方法判断是否为文件类型，用isImage接收，不存在给提示并返回false，还要限制一下文件的大小，如果两个都没问题返回为true，接下来把文件发送给后端，先定义接口，定义方法uploadFile传进文件及文件参数，在方法中创建formData对象，在formData中放入文件file businessType businessInfo和businessField,再调用接口，为post请求。<br>引入接口，来到第二个方法handleUploadRequest，解构file文件，传入文件对象，传bussinessId，也就是一个唯一的标识，用UUID生成传给businessId，传进businessId，拿到value值，用变量叫做fileRes存一下，打印结果，测试时，成功调用接口，但是businessId未成功传递，为了解决问题，只留打印businessId部分，发现传递本身即为字符串，把这个value去掉，这时成功拿到文件地址filePath相对路径,新建配置文件夹config，新建index.js，定义路径fileBaseUrl，将这个地址引入，把图片进行路径完整拼接，将相对路径赋值给formData.coverImage，最后做一个样式效果，定义一个移除封面的方法。</p>
-<h1 id="3-Editor富文本"><a href="#3-Editor富文本" class="headerlink" title="3.Editor富文本"></a>3.Editor富文本</h1><p>使用插件wangEditor，根据介绍下载和引入，创建组件RichTextEditor.vue，编辑样式，使用时引入进文件，定好位置后用表单域包裹，编辑属性内容，这里需要添加一个change事件，在用户输入时，把用户输入内容在父组件获取，定义方法handleContentChange，定义方法，创建时对外暴露了create方法，有初始化内容统计，检查字体菜单，判断字体菜单最后触发创建成功。<br>今天的进度如图所示<br><img src="/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day6/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-08-20%20212413.png"></p>
+<h1 id="3-Editor富文本"><a href="#3-Editor富文本" class="headerlink" title="3.Editor富文本"></a>3.Editor富文本</h1><p>使用插件wangEditor，根据介绍下载和引入，创建组件RichTextEditor.vue，编辑样式，使用时引入进文件，定好位置后用表单域包裹，编辑属性内容，这里需要添加一个change事件，在用户输入时，把用户输入内容在父组件获取，定义方法handleContentChange，定义方法，创建时对外暴露了create方法，有初始化内容统计，检查字体菜单，判断字体菜单最后触发创建成功。<br>今天的进度如图所示<br><img src="/images/2026-08-20.png"></p>
 
     </div>
     
