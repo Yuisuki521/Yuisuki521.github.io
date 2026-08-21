@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>心理健康助手+ai Day1 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day7 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -184,35 +184,24 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>心理健康助手+ai Day1</h1>
+        <h1>心理健康助手-ai-Day7</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/8/14
-        </span>
-        
-        <span class="category">
-            <a href="/categories/study/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
+            2026/8/21
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第一天，是我的第一个项目</p>
+        <p>今天是心理健康助手＋ai项目的第七天，做了富文本的其他功能和编辑功能</p>
 <span id="more"></span>
-<h1 id="1-nvm和node版本"><a href="#1-nvm和node版本" class="headerlink" title="1.nvm和node版本"></a>1.nvm和node版本</h1><p>需要用到node的24版本，所以学习用到了nvm，可以调节node的不同版本，node也十分方便管理这些版本，用到了一些基本命令像<br>nvm list<br>nvm install 24<br>nvm use 24</p>
-<h1 id="2-vite脚手架工具"><a href="#2-vite脚手架工具" class="headerlink" title="2.vite脚手架工具"></a>2.vite脚手架工具</h1><p>vue3需要依赖脚手架工具，这里我学习用到了vite<br>npm create vite@latest快速创造项目</p>
-<h1 id="3-创造管理员页面"><a href="#3-创造管理员页面" class="headerlink" title="3.创造管理员页面"></a>3.创造管理员页面</h1><h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h3><p>使用组件库element plus，安装后引入，考虑到管理员和使用者的双页面，所以定义路由时需要将两个板块分开，认识并使用vue-router插件，这里使用4.0版本<br>安装npm install <a href="mailto:&#118;&#117;&#101;&#45;&#114;&#x6f;&#117;&#x74;&#x65;&#x72;&#64;&#52;&#x2e;&#54;&#46;&#52;">vue-router@4.6.4</a>。</p>
-<h3 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h3><p>创建router文件夹，其下创建index.js文件引入vue-router，使用history模式，并创建后台管理管理路由backendroutes，backendroutes创建集合，主路由为&#x2F;back，使用嵌套模式，为了引入backendlayout(子路由先不动)<br>在components文件夹下创建backendlayout.vue，在index.js文件中引入backendlayout.vue<br>创建对象接收创造的router，并导出，在入口文件中引入router并挂载进去，在backendlayout文件使用router标签<br>(遇到@服务问题，找到vite配置文件，使用resolve进行路径拼接)<br>在elementplus中找到合适框架加入到backendlayout，这里使用ai将引入的框架进行调整，达到填充合适并美观的样子<br>今天的进度如图所示<br><img src="/images/2026-08-14.png"></p>
+<h1 id="1-富文本其他内容"><a href="#1-富文本其他内容" class="headerlink" title="1.富文本其他内容"></a>1.富文本其他内容</h1><p>当富文本输入时触发函数使用handleContentChange，传入data打印出来，发现有两个是html和text，后端需要时传html，当需要做展示时传text，定义handleContentChange，formData.content需要被html赋值。handleEditorCreated是当创建完成后需要做的事情，需要考虑新增和编辑，在判断前需要给value赋值，编辑时考虑formData.content，内容存在时并且编辑器也被创建的情况下要将富文本内容回填，用editor.setHtml方法，为了确保富文本内容一定被创建，引入nextTick，把内容重新传入。预览效果，添加按钮，需要进行状态判断，定义状态btnPreview默认ref为false，在按钮中添加判断状态，当状态存在为隐藏，初始为预览，添加显示条件，当按钮处于显示状态时显示。再做取消和新增效果，取消时直接调用handleClose方法，新增按钮定义方法handleSubmit，需要考虑这个按钮不能让用户反复点击，重复调用接口提交，添加loading效果，定义loading效果和提交效果，提交效果需要调用接口新增和编辑共用一个接口，关键在于是否有id，定义apicre进行表ateArticle接口引入，handleSubmit需要单校验，给formRef定义，在定义handleSubmit时通过ref获取,通过调用validate的方法校验，传入valid和fields，如果valid为true时，表单才通过校验进行提交，将提交的数据进行解构，再传入tags进行合并，直接调新增接口，将数据传递进去.then拿到状态，取消掉loading效果改成false，在父组件定义方法handlesuccess把数据传递给外部组件，在子组件用emit把方法接收，再调用emit.success。</p>
+<h1 id="2-编辑功能和回显功能"><a href="#2-编辑功能和回显功能" class="headerlink" title="2.编辑功能和回显功能"></a>2.编辑功能和回显功能</h1><p>因为编辑功能和新增功能共用一个弹窗，编辑功能多了数据回显，需要通过状态进行判断，在触发按钮处添加点击事件handleEdit，把当前行数据传入，定义handleEditor，在控制台可以看到id参数，通过id拿到详情数据，定义api getArticleDetail接口引入，在handleEdit中需要进行判断如果没有id不能调接口，存在时拿到id传递进来用接口，数据解决完，接下来把编辑弹窗显示出来，将父组件拿到的数据传递给子组件，在父组件knowledge.vue定义属性，定义currentArticle接收这个属性，默认值为null，调用接口后把数据赋值，还要打开弹窗，传递给子组件ArticleDialog，并定义一个article属性,把数据currentArticle进去；在子组件ArticleDialog.vue中props定义article给一个null,因为在弹窗中需要当以一个字段判断他处于新增还是编辑，创建变量isEdit通过计算属性，判断数据是否存在，拿到props.article.id，如果有id为编辑，这时isEdit可判断属于什么状态，可以将标题和创建按钮变成动态的，再调用点击事件时handleEdit传入时传入空值，在新增时候把状态改变，数据重置null。<br>需要回显时候，需要对状态数据进行监听，通过watch，但是考虑到一个问题当先点击编辑时候，会先走watch逻辑，弹窗代开form创建是一个异步过程，直接赋值可能是form还未创建就赋值，这种情况下会出现问题，需要通过nextTick。watch监听当数据发生变化即存在时，把formData数据赋值，但是之前定义formData时使用的是reactive，不能整体赋值，通过object.assign方法赋值，使用现有的bussinessId.value，在外重新定义bussinessId，默认值为null,把newVal的id赋值给bussinessId.value，还有封面的url赋值。<br><img src="/images/2026-08-21.png"></p>
 
     </div>
     
