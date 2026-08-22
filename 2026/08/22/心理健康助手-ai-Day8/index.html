@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Categories | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day8 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -178,34 +182,36 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/life/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                生活
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/study/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day8</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/8/22
         </span>
         
         
     </div>
+    
+    <div class="content" v-pre>
+        <p>今天是心理健康助手＋ai项目的第七天，做了富文本的其他功能和编辑功能</p>
+<span id="more"></span>
+<h1 id="1-新增和编辑重换接口"><a href="#1-新增和编辑重换接口" class="headerlink" title="1.新增和编辑重换接口"></a>1.新增和编辑重换接口</h1><p>新增和编辑不能共用同一个接口，接收id和data数据创建编辑接口，新增与编辑用if else确定逻辑关系。</p>
+<h1 id="2-发布-下线和删除功能"><a href="#2-发布-下线和删除功能" class="headerlink" title="2.发布 下线和删除功能"></a>2.发布 下线和删除功能</h1><p>给发布按钮和下线按钮创建点击事件，触发handlePublish和handleUnpublish，定义两个方法，发布时传进当前行数据，做一个二次确认弹窗，引入ElMessageBox组件，调用组件创建效果，当用户在这个窗口点击确认时，需要调用接口改变状态，创建接口changeArticleStatus，引入接口再调用，传进id和状态，状态为1时呈现发布按钮，下线按钮和发布类似只不过状态为2，删除按钮时点击事件handleDelete，定义交互逻辑与上方两个相同，接口调用不同，创建接口deleteArticle引入，下方定义时状态为3，调用接口换为deleteArticle。</p>
+<h1 id="3-咨询记录页面的列表"><a href="#3-咨询记录页面的列表" class="headerlink" title="3.咨询记录页面的列表"></a>3.咨询记录页面的列表</h1><p>找到页面consultaltons.vue，创建简单样式，引入必要组件el-table拿到列表数据，定义变量tableData和pagination,创建接口getConsultationPage引入，封装handleSearch方法，在生命周期onMounted中调用handleSearch，把pagination传递进去拿到res，res中解构records和total，把这里两个数据给tableData.value和pagination.total，在基础样式中把列表每一列创建出来，把数据对应赋值给prop，最后一列是操作，可以查看详情，创建按钮加点击事件viewSessionDetail并定义，再实现分页效果。</p>
+<h1 id="4-详情效果实现"><a href="#4-详情效果实现" class="headerlink" title="4.详情效果实现"></a>4.详情效果实现</h1><p>实现通过el-dialog写出弹窗，v-model定义showDetailDialog默认为false，内容为两部分head和content，将对应内容数据传递进去，当点击详情按钮时，需要定义一个字段叫sessionDetail把当前行数据传递进去，就可以通过sessionDetail把数据传递进去。下半部分的消息列表需要调用接口，创建接口getSessionDetail引入，当点击详情按钮时使用接口，创建变量sessionMessages存res，列表的message-list部分需要遍历sessionMessages，通过接口返回的senderType，来确定内容是谁发布的进行状态判断，用户为1，ai为2。<br><img src="/images/2026-08-22.png"><br><img src="/images/2026-08-22(2).png"></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -237,6 +243,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
