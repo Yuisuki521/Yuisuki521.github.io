@@ -198,7 +198,7 @@
     </div>
     
     <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第七天，做了富文本的其他功能和编辑功能</p>
+        <p>今天是心理健康助手＋ai项目的第八天，做了富文本的其他功能和编辑功能</p>
 <span id="more"></span>
 <h1 id="1-新增和编辑重换接口"><a href="#1-新增和编辑重换接口" class="headerlink" title="1.新增和编辑重换接口"></a>1.新增和编辑重换接口</h1><p>新增和编辑不能共用同一个接口，接收id和data数据创建编辑接口，新增与编辑用if else确定逻辑关系。</p>
 <h1 id="2-发布-下线和删除功能"><a href="#2-发布-下线和删除功能" class="headerlink" title="2.发布 下线和删除功能"></a>2.发布 下线和删除功能</h1><p>给发布按钮和下线按钮创建点击事件，触发handlePublish和handleUnpublish，定义两个方法，发布时传进当前行数据，做一个二次确认弹窗，引入ElMessageBox组件，调用组件创建效果，当用户在这个窗口点击确认时，需要调用接口改变状态，创建接口changeArticleStatus，引入接口再调用，传进id和状态，状态为1时呈现发布按钮，下线按钮和发布类似只不过状态为2，删除按钮时点击事件handleDelete，定义交互逻辑与上方两个相同，接口调用不同，创建接口deleteArticle引入，下方定义时状态为3，调用接口换为deleteArticle。</p>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 生活 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day9 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -178,59 +182,34 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/life/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                生活
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/categories/study/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day9</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/8/23
         </span>
         
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/9/23</div>
-            <a href="/2025/09/23/My-anime-watching-history/">
-                <h3>My anime watching history</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/life/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        生活
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>今天是心理健康助手＋ai项目的第九天，做了情绪日志的页面</p>
+<span id="more"></span>
+<h1 id="1-情绪日志列表"><a href="#1-情绪日志列表" class="headerlink" title="1.情绪日志列表"></a>1.情绪日志列表</h1><p>创建情绪日志列表页面，引入相关组件，表头用TableSearch，列表用tableData，定义tableData字段，创建列表接口getEmotionalPage引入，列表的变量可以复用以前的，只需要把接口换成对应的，再在生命周期中调用，完善列表自定义样式，做详情和删除按钮。</p>
+<h1 id="2-详情和删除功能"><a href="#2-详情和删除功能" class="headerlink" title="2.详情和删除功能"></a>2.详情和删除功能</h1><p>弹窗里的效果el-dialog，定义属性detailDialogVisible弹窗是否打开，默认值为false，详情按钮点击事件viewSessionDetail，传入当前行数据，定义这个方法，因为可以拿到当前行数据，所以不用定义接口，定义currentDetail存储数据初始值为null，把当前行数据赋值给他，弹窗中内容使用el-plus的描述列表的样式结构，创建相关部分并传进数据，其中ai分析的aiEmotionAnalysis是json数据，需要转为json对象，当ai数据存在进行转化，不存在为null，其中进度条部分用了el-progerss组件，做一下关闭按钮，然后做一下style，删除按钮点击方法叫handledelete传进当前行数据，ElMessageBox做弹窗提醒，创建删除接口deleteEmotional引入使用。<br><img src="/images/2026-08-23.png"><br><img src="/images/2026-08-23(2).png"></p>
+
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -262,6 +241,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
