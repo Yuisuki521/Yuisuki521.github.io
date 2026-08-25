@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>心理健康助手+ai Day1 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day11 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -184,35 +184,25 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>心理健康助手+ai Day1</h1>
+        <h1>心理健康助手-ai-Day11</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/8/14
-        </span>
-        
-        <span class="category">
-            <a href="/categories/study/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
+            2026/8/25
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第一天，是我的第一个项目</p>
+        <p>今天是心理健康助手＋ai项目的第十一天，做了登出部分和页面首页展示</p>
 <span id="more"></span>
-<h1 id="1-nvm和node版本"><a href="#1-nvm和node版本" class="headerlink" title="1.nvm和node版本"></a>1.nvm和node版本</h1><p>需要用到node的24版本，所以学习用到了nvm，可以调节node的不同版本，node也十分方便管理这些版本，用到了一些基本命令像<br>nvm list<br>nvm install 24<br>nvm use 24</p>
-<h1 id="2-vite脚手架工具"><a href="#2-vite脚手架工具" class="headerlink" title="2.vite脚手架工具"></a>2.vite脚手架工具</h1><p>vue3需要依赖脚手架工具，这里我学习用到了vite<br>npm create vite@latest快速创造项目</p>
-<h1 id="3-创造管理员页面"><a href="#3-创造管理员页面" class="headerlink" title="3.创造管理员页面"></a>3.创造管理员页面</h1><h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h3><p>使用组件库element plus，安装后引入，考虑到管理员和使用者的双页面，所以定义路由时需要将两个板块分开，认识并使用vue-router插件，这里使用4.0版本<br>安装npm install <a href="mailto:&#x76;&#117;&#x65;&#x2d;&#x72;&#x6f;&#117;&#x74;&#x65;&#114;&#x40;&#x34;&#46;&#54;&#46;&#52;">vue-router@4.6.4</a>。</p>
-<h3 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h3><p>创建router文件夹，其下创建index.js文件引入vue-router，使用history模式，并创建后台管理管理路由backendroutes，backendroutes创建集合，主路由为&#x2F;back，使用嵌套模式，为了引入backendlayout(子路由先不动)<br>在components文件夹下创建backendlayout.vue，在index.js文件中引入backendlayout.vue<br>创建对象接收创造的router，并导出，在入口文件中引入router并挂载进去，在backendlayout文件使用router标签<br>(遇到@服务问题，找到vite配置文件，使用resolve进行路径拼接)<br>在elementplus中找到合适框架加入到backendlayout，这里使用ai将引入的框架进行调整，达到填充合适并美观的样子<br>今天的进度如图所示<br><img src="/images/2026-08-14.png"></p>
+<h1 id="1-登出和导航守卫"><a href="#1-登出和导航守卫" class="headerlink" title="1.登出和导航守卫"></a>1.登出和导航守卫</h1><p>这里的登出是在一个组件里，有一个command值，退出时需要把用户信息和token清除并跳转到登录页面，提示依旧使用ElmssageBox组件，创建接口lgout并引入，在这个command值等于lgout时，调用接口，在调用后在返回的响应里做token和用户信息的清除与页面的跳转。<br>接下来是只输入端口号就可以进入到首页的跳转，在路由部分添加路由的前置守卫，通过调用router.beforeEach的方法传入三个参数，要实现访问&#x2F;时可以直接跳转到页面，当未登录时&#x2F;可直接跳转到登录页面，登录后台账号时，直接跳转到后台页面，在原来后台部分添加重定向逻辑redirect，直接返回到页面，在前置守卫中通过localStorge.getItem得到token数据，判断如果token存在，就为登录，当用户没有登陆时，对于后台用户直接跳转到登录页面，对于前台用户来说 会跳到首页，所以要判断用户是前台登录还是后台登录，通过判断路径，所有后台数据都是带有&#x2F;back，通过to.path为即将跳转的路径，当有&#x2F;back时候可以判断为后台登录，跳转为未登录页面；登录时也要判断是前台用户还是后台用户，通过判断userInfo的userType转为json数据为2时为后台用户，再下一步判断这个上面说的页面登陆是否为后台登录&#x2F;back,判断成功后即使不为&#x2F;back，也跳转进后台首页，结构图为</p>
+<p>router.beforeEach(to, from, next)<br>│<br>├─ 读取 token &#x3D; localStorage.getItem(‘token’)<br>│<br>├─ [token 存在?]<br>│   │<br>│   ├─ YES → 读取 userInfo &#x3D; JSON.parse(localStorage.getItem(‘userInfo’))<br>│   │        │<br>│   │        ├─ [userType &#x3D;&#x3D;&#x3D; 2]  (管理员)<br>│   │        │   ├─ to.path 以 ‘&#x2F;back’ 开头?<br>│   │        │   │   ├─ YES → next()              ✅ 放行<br>│   │        │   │   └─ NO  → next(‘&#x2F;back&#x2F;dashboard’)  🔄 强制进后台<br>│   │        │<br>│   │        └─ [userType &#x3D;&#x3D;&#x3D; 1]  (普通用户)<br>│   │            └─ (目前为空逻辑,无 next 调用)<br>│   │<br>│   └─ NO  → [to.path 以 ‘&#x2F;back’ 开头?]<br>│            ├─ YES → next(‘&#x2F;auth&#x2F;login’)         🔄 跳登录<br>│            └─ NO  → next()                       ✅ 放行</p>
+<h1 id="2-页面首页展示"><a href="#2-页面首页展示" class="headerlink" title="2.页面首页展示"></a>2.页面首页展示</h1><p>将首页页面做出<br><img src="/images/2026-08-25.png"></p>
 
     </div>
     
