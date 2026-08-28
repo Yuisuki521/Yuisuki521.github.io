@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>心理健康助手-ai-Day12 | Yuisuki&#39;s home</title>
+    <meta name="author" content="Yuisuki521" />
+    <meta name="description" content="Love, games, and anime" />
+    <meta name="keywords" content="Love, games, and anime" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>YUISUKI&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;YUISUKI&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day12</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/8/27
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>今天是心理健康助手＋ai项目的第十天，做了用户界面的AI对话功能等等</p>
+<span id="more"></span>
+<h1 id="1-登录跳转"><a href="#1-登录跳转" class="headerlink" title="1.登录跳转"></a>1.登录跳转</h1><p>继续在登录页面，上次只处理了用户为管理角色的跳转，用户需要跳转进首页，还要再在路由的前置守卫，继续写判断为前台用户userType&#x3D;&#x3D;1时，可以访问前台路由，通过判断访问路径有&#x2F;back，还有已登录用户&#x2F;auth，应该让用户跳转进首页，没问题的直接next()，登出操作给登出按钮增加点击事件handleLogout并定义，引入登出和router接口，登出需要清楚token与用户信息并跳转进登陆页面。</p>
+<h1 id="2-AI咨询界面"><a href="#2-AI咨询界面" class="headerlink" title="2.AI咨询界面"></a>2.AI咨询界面</h1><p>将AI咨询的界面先做出，功能部分有会话 会话历史和情绪花园。</p>
+<h2 id="1-会话部分"><a href="#1-会话部分" class="headerlink" title="1.会话部分"></a>1.会话部分</h2><p>在会话顶栏右上角有新建会话的按钮，添加点击事件creatNewFrontendSession，内容部分会有一个默认的欢迎消息语，只有没有会话消息时才会出欢迎语，定义一个对话消息message为一个空数组。通过如果message为0时，写出欢迎用语。发送按钮处创建点击事件sendMessage,用户输入区定义名字userMessage并定义后面保存用，文本域会有禁用效果，定义文本域状态isAiTyping并定义，默认为false，接下来是实现用户输入后的整个对话效果，当用户第一次发送消息，相当于创建了一次新的对话，ai回答会调用流式接口，实现创建会话接口，要传入用户输入内容和标题，标题用来后面的会话历史做展示，这两个统称为绘会话消息，要在页面首次加载中和点击右上角新建聊天时定义出来，新定义接口startSession并引入；新建会话部分creatNewFrontendSession，创建新的会话对象为newSession，包括一个唯一标识设默认值temp_${Date.now()}，会话状态status默认值TEMP，标题sessionTitle默认值为新会话，在外面定义当前会话对象currentSession调用接口时用来拿会话信息，把这个newSession赋值给这个currentSession；还有在页面首次加载，在onMounted生命周期中需要创建新的对话。<br>用户的对话逻辑，定义发送按钮的sendMessage方法，首先要处理用户的输入内容，需要判断用户有没有输入内容(去掉首尾空格)，如果为空就不用调接口，接下来要要判断isTyping存在时给提示ai正在输入中，定义变量message接收用户输入(去除首尾空格)，在将userMessage清空，接下来要判断会话状态，有两种情况，如果之前没有会话或者临时会话，就需要创建新的会话记录，通过新建会话中的status状态判断，当status为TEMP的时候需要创建新会话(为了用户再次发送消息，else中将用户内容添加到页面上，再调用流式接口)定义单独功能startNewSession传入message，构建会话sessionParams参数传入initialMessage还有标题，需要判断currentSession.value.sessionTitle如果为新创建的会话记录标题为新会话，需要创建一个新的会话记录的标题sessionTitle格式为’艾拉-${new Data().toLocalString()}’,else为历史的会话，就让sessionParams.sessionTitle直接拿这个title数据这个currentSession后面在查看历史记录时再定义，调用接口startSession，需要将后端返回的数据转为前端会话格式把返回值赋值再判断是否为临时会话，如果临时会话需要更新数据，currentSession存在并且当前会话记录为TEMP那么需要变为正式会话，需要把后端整理好的数据与之前的数据合并Object.assign，否则创建新的会话，把整理好的数据赋值给之前的数据。<br>流式对话功能，在startNewSession方法中要开始流式对话，将用户消息传入，再定义方法startAIResponse传入sessionId还有用户输入信息message，在这个方法先进行判断防止重复发送如果isTyping存在给提示在输入return，不存在接下来修改AI的isTyping为true，定义aiMessage，id还没有拿到后端返回，需要生成默认id且唯一ai_${Date.now()_${Math.random().toString(36).substr(2,9)}}，senderType为2，content为空，createAt。最后将ai信息添加到message。接下来调用流式接口引入第三方库@microsoft&#x2F;fetch-event-source引入fetchEventSource方法使用，这个方法接收api地址和配置项，流式接口还有结束请求方法，创建AbortController调用它的signal属性，还有onopen属性传入response当连接成功时可以监听状态，看类型是否为流式类型，判断Content-Type，不为则给相互提示，正常返回消息将会在onmessage中传入event，raw接收event.data.trim()，如果raw为空直接返回，如果有使用定义eventName接收event.event，还要获取到当前会话的ai消息，定义变量aiMessage接收，接下来通过状态是否终止，判断当eventName为done终止时，将isAiTyping变为false，并关闭请求，如果不为done，需要获取数据将json字符串转为json对象用定义变量payload接收，当payload的code通过String取出对照是否为200用定义变量ok接收，如果状态正常且payload有数据，数据内容存在才可以显示在页面上，如果不正常给出错误显示，错误显示单独用方法handleError接收错误提示内容，在方法中获取ai消息，再判断如果ai消息存在回复AI回复失败，并改变状态为false，这个是onmessage正常情况时；异常时就会直接拿到error信息，调用错误处理方法，并将错误结果抛出方便排查；最后连接关闭时，需要进行情绪分析(后面调用情绪花园接口)。<br>onMounted<br>  ├─→ getSessionPage()          → sessionList<br>  └─→ createNewFrontendSession() → currentSession(TEMP)</p>
+<p>用户输入 → Enter&#x2F;点击发送<br>  └─→ sendMessage()<br>       ├─ 空消息? → return<br>       ├─ isAiTyping? → ElMessage → return<br>       ├─ TEMP会话? → startNewSession(message)<br>       │    ├─ startSession(API) → 更新currentSession<br>       │    ├─ getSessionPage()  → 刷新列表<br>       │    ├─ push 用户消息<br>       │    └─ startAIResponse()<br>       └─ 正式会话 → push用户消息 → startAIResponse()</p>
+<p>startAIResponse(sessionId, message)<br>  ├─ isAiTyping &#x3D; true<br>  ├─ push 空白AI消息占位<br>  └─ fetchEventSource(SSE流)<br>       ├─ onopen   → 检查Content-Type<br>       ├─ onmessage<br>       │    ├─ event&#x3D;’done’ → isAiTyping&#x3D;false → abort → loadSessionEmotion<br>       │    ├─ code&#x3D;200    → AI消息content +&#x3D; 增量内容<br>       │    └─ code≠200     → handleError<br>       ├─ onerror  → handleError → throw<br>       └─ onclose  → loadSessionEmotion</p>
+<h2 id="2-会话历史"><a href="#2-会话历史" class="headerlink" title="2.会话历史"></a>2.会话历史</h2><p>调用接口getSessionList并引用，新定义一个列表数据sessionList，默认值为空数组，将对话列表的方法定义getSessionPage传入分页参数，将拿到的数据赋值给sessionList，需要在创建会话时和页面首次加载时调用，在onMounted的生命周期中获取对话列表，还有刚才调用会话接口后进行会话列表更新，把会话列表的页面做出，需要通过v-for遍历sessionList数据拿到其中每一项，key为唯一属性session.id，还有点击事件handleSessionClick(session)更新会话数据，定义事件获取会话数据，删除理历史会话需要调用接口deleteSession引入，当点击删除的图标使用方法handleDeleteSession接收sessionId调用deleteSession接口，提示删除成功后，调用列表更新。<br>接下来时点击历史会话，会把历史的内容展示出来，把默认的替换掉，定义点击事件handleSessionClick，传入session数据，创建获取会话消息列表的接口getSessionDetail引入并在点击事件中使用传入session.id，将结果赋值给message.value拿到列表数据，更新当前会话对象数据,定义sessionData(session_ sessionid)将sessionData赋值给currentSession.value，在欢迎用语模块下续写当有数据时展示消息列表，通过v-for遍历message，key为id，需要判断senderType，用户为1，AI为2来引入头像和对话内容，用户和ai的对话框输入效果也需要判断给不同的效果，消息内容显示，对话逻辑是当v-if senderType为2时并且isTyping为true时并且message不存在时，展示 … 效果，这是AI正在思考中；还要有AI错误提示，比如额度不够，传数据时网络出现问题等等需要这个提示判断后端返回的isError为true将错误信息返回；AI正常返回消息，AI回复会有文字图标格式，需要做处理，使用组件MarkdownRenderer进行引用使用，当判断senderTpe为2，!isError为true时输入msg.content，还有是否为AI消息为true；最后一种为用户消息要判断message.content存在时将他传入对于空格换行定义方法处理formatMessageContent并定义。<br><img src="/images/2026-08-27.png"><br><img src="/images/2026-08-27(2).png"></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Yuisuki&#39;s home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuisuki521
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
