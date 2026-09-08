@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 学习 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day15 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -178,197 +182,35 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/study/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/categories/life/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                生活
-            </a>
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day15</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/6
         </span>
         
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2026/8/14</div>
-            <a href="/2026/08/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day1/">
-                <h3>心理健康助手+ai Day1</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>现在来写后端的实现过程，</p>
+<span id="more"></span>
+<h1 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1.环境配置"></a>1.环境配置</h1><p>使用Java17,springboot为4.1.1，配置项选lombook springweb和sql，还有spring data jdbc创建项目，配置项改为yml文件，数据库工具使用的是dbeaver，连接数据库，数据库一共有6张表，在yml文件中配置数据库，服务器端口可以配置为1236。</p>
+<h1 id="2-创建controller层"><a href="#2-创建controller层" class="headerlink" title="2.创建controller层"></a>2.创建controller层</h1><p>创建类Text，创建接口，定义公共前缀部分@RequestMapping(“&#x2F;api”)，定义简单接口三个步骤，定义路径 请求类型和返回格式。后端返回前端的通常为json对象，通过封装返回的java类实现，创建common文件夹，定义Result类定义属性名code msg和data添加@Data注解，返回中还有data属性，他的内部为响应体，data类型由外部传入内容决定，返回类型使用泛型；定义成功方法ok,new一个result，成功code为200，msg为success，定义失败方法error，并定义一个有参数的失败方法，但是这个传入的参数(参数依旧为code msg data)需要用户是什么状态而决定，所以以上的写死的状态都应该是一个动态的，所以要使用枚举解决，在common中创建枚举ResultCode，定义code msg属性，定义枚举项第一项要为枚举项，定义枚举项SUCCESS(“200”, “success”)，并定义失败的枚举项以此类推写出其他情况的枚举项，还要定义私有的构造方法ResultCode(参数为code和msg)和get方法，将Result类中的定值替换为调用方法。</p>
+<h1 id="3-登录接口创建"><a href="#3-登录接口创建" class="headerlink" title="3.登录接口创建"></a>3.登录接口创建</h1><p>在controller文件夹下创建User类，定义接口路径(&#x2F;api&#x2F;user)和返回格式(@Restcontroller)，定义登录接口(&#x2F;login)，请求类型为post请求，定义处理方法login，类型为Result<String>，接下来要获取传入的数据并校验，在pom.xml引入Spring Validation插件，在目录中新建文件夹DTO，对请求实体和相应实体进行区分，创建command文件夹下创建UserLoginCommandDTO，定义属性username和password，加Data注解，在实体类里进行校验，像@NotBlank @Size对应的要求也要对应sql语句。返回User文件获取内容，给login方法添加注解(@Valid @RequestBody UserLoginCommandDTO)，这里接口测试工具使用的是apifox，定义接口前缀，写路径&#x2F;user&#x2F;login，传入json数据测试，接下来是定义拦截异常的方法。</p>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/16</div>
-            <a href="/2025/11/16/hello-agent-test04/hello-agent-test04/">
-                <h3>hello-agent-test04</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/13</div>
-            <a href="/2025/11/13/hello-agent-test03/hello-agent-test03/">
-                <h3>hello-agent-test03</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/12</div>
-            <a href="/2025/11/12/hello-agent-test02/hello-agent-test02/">
-                <h3>hello agent test02</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/10</div>
-            <a href="/2025/11/10/test1%E5%AD%A6%E4%B9%A0/hello-agent-test01/">
-                <h3>hello-agent-test01</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/9/24</div>
-            <a href="/2025/09/24/Understanding-of-Markdown/">
-                <h3>Understanding of Markdown</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/9/20</div>
-            <a href="/2025/09/20/hello-world/">
-                <h3>Hello World</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
 </div>
 
@@ -400,6 +242,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>

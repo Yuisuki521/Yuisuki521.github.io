@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 学习 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day17 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -178,197 +182,36 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/study/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        
-        
-        
-        <span>
-            <a href="/categories/life/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                生活
-            </a>
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day17</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/8
         </span>
         
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2026/8/14</div>
-            <a href="/2026/08/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day1/">
-                <h3>心理健康助手+ai Day1</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>现在来写后端的实现过程，</p>
+<span id="more"></span>
+<h1 id="1-自定义业务异常处理"><a href="#1-自定义业务异常处理" class="headerlink" title="1.自定义业务异常处理"></a>1.自定义业务异常处理</h1><p>API查询后，需要判断用户是否存在，如果user为null，需要告诉前端用户不存在，属于业务异常，需要单独定义，新建exception文件夹新建Exception的BusinessException，添加注解@Getter，添加私有属性code message和data，定义BusinessException方法，然后回到UserService层，抛出异常类；异常还需要在GlobarExceptionHandler中处理异常，在处理中如果异常携带额外信息data，在处理时通过判断e.getData不为空，调用Result.error(三个参数)，为空时最后一个参数为null。</p>
+<h1 id="2-验证密码"><a href="#2-验证密码" class="headerlink" title="2.验证密码"></a>2.验证密码</h1><p>通过commandDTO.get方法拿到密码(trim())，用inputPassword接收，需要加密算法处理然后比对数据库中的密文密码，通过插件spring-boot-starter-security进行处理，新建config目录创建securityConfig类，添加@Configuration，@EnableWebSecurity，@EnableMethodSecurity，声明方法filterChain，返回类型SecurityFilterChain，通过http   .csrf(AbstractHttpConfigurer::disable)禁用csrf保护，因为后面会用到JWT，还需要配置会话管理为无状态<br>private static final String[] PUBLIC_PATHS &#x3D; {<br>            “&#x2F;“,<br>            “&#x2F;api&#x2F;test”,<br>            “&#x2F;api&#x2F;user&#x2F;login”,<br>            “&#x2F;api&#x2F;user&#x2F;add”<br>    };包装不需要保护的路径</p>
+<p>@Bean<br>public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {<br>        http<br>                .csrf(AbstractHttpConfigurer::disable)<br>                .sessionManagement(session -&gt; session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) &#x2F;&#x2F;配置会话管理为无状态<br>                .authorizeHttpRequests(auth -&gt; auth &#x2F;&#x2F;配置请求授权规则<br>                        .requestMatchers(PUBLIC_PATHS).permitAll()&#x2F;&#x2F;公开路径<br>                        .anyRequest().authenticated()&#x2F;&#x2F;其他需要认证<br>                )<br>                &#x2F;&#x2F;添加JWT过滤器<br>                .addFilterBefore(jwtAuthticationFilter(), UsernamePasswordAuthenticationFilter.class);<br>        return http.build();<br>    }<br>回到UserService，<br>private final BCryptPasswordEncoder passwordEncoder &#x3D; new BCryptPasswordEncoder();拿到实例后通过passwordEncoder的match方法判断输入密码和数据<br>库密码，如果比对失败返回业务异常，密码错误。</p>
+<h1 id="3-判断用户状态"><a href="#3-判断用户状态" class="headerlink" title="3.判断用户状态"></a>3.判断用户状态</h1><p>创建新枚举项，新建文件夹enumClass储存业务层面的枚举项，创建UserStatus添加需要的枚举项，在entity.User中创建方法isActive()，拿到UserStatus的正常的code比对数据库里查到的status,接下来在判断用户状态时直接调用isActive方法不是正常状态则抛出。</p>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/16</div>
-            <a href="/2025/11/16/hello-agent-test04/hello-agent-test04/">
-                <h3>hello-agent-test04</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/13</div>
-            <a href="/2025/11/13/hello-agent-test03/hello-agent-test03/">
-                <h3>hello-agent-test03</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/12</div>
-            <a href="/2025/11/12/hello-agent-test02/hello-agent-test02/">
-                <h3>hello agent test02</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/11/10</div>
-            <a href="/2025/11/10/test1%E5%AD%A6%E4%B9%A0/hello-agent-test01/">
-                <h3>hello-agent-test01</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/9/24</div>
-            <a href="/2025/09/24/Understanding-of-Markdown/">
-                <h3>Understanding of Markdown</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/9/20</div>
-            <a href="/2025/09/20/hello-world/">
-                <h3>Hello World</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/study/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        学习
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
     
 </div>
 
@@ -400,6 +243,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
