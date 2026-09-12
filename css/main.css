@@ -1008,10 +1008,6 @@ ol li {
 .series-count {
     color: #66afef;
 }
-.series-summary {
-    color: #5c6b72;
-    text-align: center;
-}
 .series-details .series-chevron {
     transition: transform 0.25s;
 }
