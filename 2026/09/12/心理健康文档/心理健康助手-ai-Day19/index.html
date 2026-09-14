@@ -194,13 +194,36 @@
             2026/9/12
         </span>
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         
     </div>
     
     <div class="content" v-pre>
         <p>现在来写后端的实现过程，</p>
 <span id="more"></span>
-<h1 id="1-获取当前用户接口"><a href="#1-获取当前用户接口" class="headerlink" title="1.获取当前用户接口"></a>1.获取当前用户接口</h1>
+<h1 id="1-获取当前用户"><a href="#1-获取当前用户" class="headerlink" title="1.获取当前用户"></a>1.获取当前用户</h1><p>不需要前端传递参数，只需要token信息就可以，此接口需要通过安全验证，从token中提取出userId数据。首先定义接口get请求(“&#x2F;current”)，返回类型为Result&lt;UserLoginResponseDTO.UserDetailResponseDTO&gt;，起名为getCurrentUser。<br>从token中拿到userId，需要对之前安全拦截框架增加拦截后的处理逻辑，添加JWT认证过滤器，在util文件夹下定义过滤器方法JwtAuthicationFilter继承OncePerRequestFilter(为保证通过过滤器方法只通过一次)，对方法进行重写：</p>
+<h2 id="公开路径处理逻辑"><a href="#公开路径处理逻辑" class="headerlink" title="公开路径处理逻辑"></a>公开路径处理逻辑</h2><p> protected boolean shouldNotFilter(HttpServletRequest request) {<br>        String requestUrl &#x3D; request.getRequestURI();<br>        return SecurityConfig.isPublicPATH(requestUrl);<br>    } (不需要过滤的方法)<br>拿到request请求，在SecurityConfig中定义isPublicPATH方法来检验公共路径有没有request的这条路径，接收请求的地址requsetUrl，在方法里面判断requsetUrl是否在公共路径中，引入AntPathMatcher来进行路径对比<br> public static Boolean isPublicPATH(String requestUrl) {<br>        for (String publicPath : PUBLIC_PATHS) {<br>            if (antPathMatcher.match(publicPath, requestUrl)) {<br>                return true;<br>            }<br>        }<br>        return false;<br>    }</p>
+<p>回到JwtAuthicationFilter<br> protected void doFilterInternal(<br>            HttpServletRequest request,<br>            HttpServletResponse response,<br>            FilterChain chain) throws ServletException, IOException{}<br>对方法进行重写，先获取请求的URL和方法<br> String requestUrl &#x3D; request.getRequestURI();<br> String method &#x3D; request.getMethod();<br>打印上方两条数据，将现在编写的JwtAuthicationFilter方法引入添加到处理的地方，在apifox里进行测试，打印出url和get请求。</p>
+<h1 id="2-JWT认证流程"><a href="#2-JWT认证流程" class="headerlink" title="2.JWT认证流程"></a>2.JWT认证流程</h1><p>提取JWT的token在JwtTokenUtil方法中创建提取token方法extractTokenFromRequest，参数从request中拿到首先判断request是否存在直接返回null，如果存在从header中拿到token，创建tokenHeader接收，通过StringUtils.hasText(tokenHeader)判断tokenHeader是否为正确，正确就返回出去，否则返回null，回到JwtAuthicationFilter，拿到token，然后进行判断token是否存在，如果不存在需要清理上下文，单独创建清理Spring Security上下文方法clearSecurityContext。<br> private void clearSecurityContext() {<br>        SecurityContextHolder.clearContext();<br>    }<br>如果token未获取到就调用方法清理上下文，还需要向外部返回错误提示，需要在Util层新建ResponseUtil单独处理过滤器中的异常相应(之前定义的Result是在进入controller层之前，所以不能使用)，实现方法<br> public static void writeError(HttpServletResponse response, ResultCode resultCode){<br>        &#x2F;&#x2F;根据不同结果码返回不同的响应<br>        int status &#x3D; switch (resultCode){<br>            case UNAUTHORIZED, ACCESS_UNAUTHORIZED, TOKEN_INVALID, TOKEN_EXPIRED, TOKEN_BLOCKED -&gt; HttpStatus.UNAUTHORIZED.value();<br>            case TOKEN_ACCESS_FORBIDDEN -&gt; HttpStatus.FORBIDDEN.value();<br>            default -&gt; HttpStatus.BAD_REQUEST.value();<br>        };<br>        response.setStatus(status);<br>        response.setContentType(MediaType.APPLICATION_JSON_VALUE);<br>        response.setCharacterEncoding(StandardCharsets.UTF_8.name());</p>
+<pre><code>    try (PrintWriter writer = response.getWriter()){
+        String jsonResponse = JSONUtil.toJsonStr(Result.error(resultCode.getCode(), resultCode.getMsg(), null));
+        writer.print(jsonResponse);
+        writer.flush();//确保响应写入到输出流
+    }catch (IOException e){
+        System.out.println(&quot;写入响应失败：&quot;+e.getMessage());
+    }
+}
+</code></pre>
+<p>再将方法使用，token没有问题时再继续过滤器链，下节我们写token存在时的逻辑。<br> chain.doFilter(request, response);</p>
+
     </div>
     
     
@@ -211,7 +234,7 @@
             心理健康助手 AI 开发日记
         </span>
         <span class="series-progress">
-            19 / 19 章
+            19 / 20 章
         </span>
     </div>
     <div class="series-nav-links">
@@ -384,16 +407,24 @@
                     </a>
                 </li>
                 
+                <li class="series-chapter">
+                    <a href="/2026/09/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day20/" title="心理健康助手-ai-Day20">
+                        <span class="chapter-no">Day20</span>
+                        <span class="chapter-title">心理健康助手-ai-Day20</span>
+                        <span class="chapter-date">9/14</span>
+                    </a>
+                </li>
+                
             </ul>
         </details>
         
-        <span class="series-nav-link next disabled">
+        <a class="series-nav-link next" href="/2026/09/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day20/">
             <span>
                 <em>下一章</em>
-                <strong>已经是最新章</strong>
+                <strong>Day20</strong>
             </span>
             <i class="fa-solid fa-arrow-right fa-fw"></i>
-        </span>
+        </a>
         
     </div>
 </div>
