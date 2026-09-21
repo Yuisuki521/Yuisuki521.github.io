@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>心理健康助手-ai-Day3 | Yuisuki&#39;s home</title>
+    <title>心理健康助手-ai-Day23 | Yuisuki&#39;s home</title>
     <meta name="author" content="Yuisuki521" />
     <meta name="description" content="Love, games, and anime" />
     <meta name="keywords" content="Love, games, and anime" />
@@ -184,25 +184,45 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>心理健康助手-ai-Day3</h1>
+        <h1>心理健康助手-ai-Day23</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2026/8/16
+            2026/9/20
+        </span>
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
         </span>
         
         
     </div>
     
     <div class="content" v-pre>
-        <p>今天是心理健康助手＋ai项目的第三天，内容部分的功能。</p>
-<span id="more"></span>
-<h1 id="1-标题栏菜单的展开和收起"><a href="#1-标题栏菜单的展开和收起" class="headerlink" title="1.标题栏菜单的展开和收起"></a>1.标题栏菜单的展开和收起</h1><p>涉及到两个相邻组件，相邻的组件通信有父子组件通信和全局的状态管理，这里使用全局状态管理，使用pinia组件，安装引用挂载，在src下新建stores，其下先新建后台asmin.js，创建store，通过definestore方法使用store，定义definestore方法并对外暴露，用useAdminStore接收。<br>找到Navbar的点击按钮部分添加点击方法，命名为handleCollapse,引入admin.js，拿到useAdminStore的暴露方法并调用可以进行状态修改，要使用这个状态的地方是Sidebar，在Sidebar中拿到useAdminStore方法，同时引用计算属性computed来监听useAdminStore中的属性，并用isCollapse接收传进在menu中添加的collapse属性，图片被伸拉可以用ai进行调整，文字可以不用展示，取和isCollpase相反状态，当菜单收起时右侧内容栏和导航栏会跟随左侧菜单栏收起向左靠拢，所以要将aside宽度变成动态。判断是否是折叠状态来决定宽度。</p>
-<h1 id="2-内容的列表部分"><a href="#2-内容的列表部分" class="headerlink" title="2.内容的列表部分"></a>2.内容的列表部分</h1><p>使用form组件，因为其他部分也会用到form表单，所以封装成组件可以阻止代码冗余，创建TableSearch.vue。使用el-form，首先确认组件如何使用，在knoeledge中引用TableSearch并使用，起名为formItem，定义formItem，表单里的内容是传入formItem的数组的元素，将TableSearch传进knowledge并使用，TableSearch传进search方法，定义search的handleSearch函数用于回调。<br>在TableSearch中用defineProps接收formItem用props接收defineProps作为数据源，在el-form中用模板遍历formItem中的每一个元素，用item.prop定义key,在el-form-item中使用knowledge中formItem的元素内容，在formItem可重新定义新的数组select做搜索栏，做下拉菜单时添加options加下拉选项，渲染el-form-item后期可能会新增加内容，用v-if会写较多次数，所以用动态组件comonent,通过is中传入的内容决定其他内容，这里给传入is的内容定义为方法isComp(item.comp),定义isComp方法做映射关系，input对应el-input,select同理。<br>动态组件内部对下拉部分的内容，需要用el-option,在TableSearch中写其部分，需要做一个是否是select的判断，如果是select，那么有el-option,遍历item.option拿到label和value,key使用value。<br>el-from需要收集用户填写的内容，给el-form中添加model对应响应式数据,叫他formDate,并声明和引入ref和reactive，创建初始响应式表单数据formDate，给component也绑定数据。</p>
-<h1 id="3-查询和重置"><a href="#3-查询和重置" class="headerlink" title="3.查询和重置"></a>3.查询和重置</h1><p>在form表单中增加查询和重置的按钮，增加点击事件，定义名称并定义方法。<br>查询时获取表单数据就是拿到formDate，触发search方法defineEmits并用emit接收，在handleSearch中使用emit传递出去，在外部拿到回调数据<br>重置时，根据el-plus在form表单中例子，在el-form中添加ref属性，命名为rulerFormRef,<br>rulerFormRef对应ref,在进行重置事件点击时调用rulerFormRef。定义handleReset方法，先formEl判断元素是否存在，不存在直接return，如果存在则调用formEl.resetFields()，重置后用户可能再次查询，这里最好不要直接调用搜索方法，因为可能会导致父子组件职责混乱，代码耦合度过高无法使用，所以需要把重置的结果传递出去给父组件。<br>今天的进度如图所示<br><img src="/images/2026-08-16.png"></p>
+        <h1 id="1-SSE流式对话接口"><a href="#1-SSE流式对话接口" class="headerlink" title="1.SSE流式对话接口"></a>1.SSE流式对话接口</h1><p>创建接口，引入SpringAI，需要传两个数据sessionId和用户输入内容，定义ConsultationStreamDTO类<br> @NotBlank(message &#x3D; “sessionId不能为空”)<br>    private String sessionId;</p>
+<pre><code>@NotBlank(message = &quot;初始消息不能为空&quot;)
+@Size(max = 2000, message = &quot;初始消息不能超过2000个字符&quot;)
+private String userMessage;
+</code></pre>
+<p>回到controller层，传入验证ConsultationStreamDTO streamDTO，然后获取当前用户，进行判断<br> if(userId &#x3D;&#x3D; null){<br>            return Flux.just(ServerSentEvent.<String>builder()<br>                    .event(“error”)<br>                    .data(JSONUtil.toJsonStr(Result.error(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMsg(), “用户未登录”)))<br>                    .build()<br>            );}</p>
+<h1 id="2-流式对话逻辑"><a href="#2-流式对话逻辑" class="headerlink" title="2.流式对话逻辑"></a>2.流式对话逻辑</h1><p>来到PsychologicalSupportService，新建方法<br> public Flux<String> streamPsychologicalChat(String sessionId, String userMessage) {}<br>创建获取sessionId方法，因为返回值的sessionId有前缀，需要去掉前缀<br> private Long extractSessionId(String sessionId) {<br>        if(sessionId !&#x3D; null &amp;&amp; sessionId.startsWith(“session_”)){<br>            String idStr &#x3D; sessionId.substring(“session_”.length());<br>            return Long.parseLong(idStr);<br>        }<br>        return null;<br>    }<br>回到方法streamPsychologicalChat()，对id进行判断<br> Long dbSessionId &#x3D; extractSessionId(sessionId);<br>            if(dbSessionId &#x3D;&#x3D; null){<br>                sink.error(new RuntimeException(“会话ID格式错误”));<br>                return;<br>            }<br>还需要判断sessionId是否为初始数据，如果以前数据库有了这个id就不用再次调用了。<br>在consultationMessageService新建方法<br> public Integer getMessageCountBySessionId(Long sessionId) {<br>        LambdaQueryWrapper<ConsultationMessage> queryWrapper &#x3D; new LambdaQueryWrapper<ConsultationMessage>()<br>                .eq(ConsultationMessage::getSessionId, sessionId);</p>
+<pre><code>    Long count = consultationMessageMapper.selectCount(queryWrapper);
+
+    return count.intValue();
+}
+</code></pre>
+<p>回到原方法，调用方法<br>&#x2F;&#x2F;是否为初始消息<br>            boolean isInitialMessage &#x3D; false;<br>            &#x2F;&#x2F;检查是否为初始消息，避免重复处理<br>            Integer messageCount &#x3D; consultationMessageService.getMessageCountBySessionId(dbSessionId);<br>            if(messageCount &#x3D;&#x3D; 1){<br>                ConsultationMessageResponseDTO lastMessage &#x3D; consultationMessageService.getLastMessageBySessionId(dbSessionId);<br>                if(lastMessage !&#x3D; null &amp;&amp; lastMessage.getSenderType() &#x3D;&#x3D; 1 &amp;&amp; userMessage.equals(lastMessage.getContent())){<br>                    isInitialMessage &#x3D; true;<br>                }<br>            }<br>再预防message表中没有保存好数据，所以进行数据插入<br>            if(!isInitialMessage){<br>                &#x2F;&#x2F;保存用户消息到数据库表<br>                consultationMessageService.saveUserMessage(dbSessionId, userMessage, null);<br>            }<br>在consultationMessageService新建方法<br> 获取会话中的最后1条消息<br>    public ConsultationMessageResponseDTO getLastMessageBySessionId(Long sessionId) {<br>        LambdaQueryWrapper<ConsultationMessage> queryWrapper &#x3D; new LambdaQueryWrapper<ConsultationMessage>();<br>        queryWrapper.eq(ConsultationMessage::getSessionId, sessionId)<br>                .orderByDesc(ConsultationMessage::getCreatedAt)<br>                .last(“limit 1”); &#x2F;&#x2F;创建时间排序拿最后一条<br>        ConsultationMessage lastMessage &#x3D; consultationMessageMapper.selectOne(queryWrapper);<br>        return lastMessage !&#x3D; null ? convertToResponseDTO(lastMessage) : null;</p>
+<pre><code>}
+</code></pre>
+<p>定义convertToResponseDTO方法转换为ConsultationMessageResponseDTO类型，还要在DTO的response里新建ConsultationMessageResponseDTO并定义。</p>
 
     </div>
     
@@ -214,16 +234,16 @@
             心理健康助手 AI 开发日记
         </span>
         <span class="series-progress">
-            3 / 24 章
+            23 / 24 章
         </span>
     </div>
     <div class="series-nav-links">
         
-        <a class="series-nav-link prev" href="/2026/08/15/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day2/">
+        <a class="series-nav-link prev" href="/2026/09/19/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day22/">
             <i class="fa-solid fa-arrow-left fa-fw"></i>
             <span>
                 <em>上一章</em>
-                <strong>Day2</strong>
+                <strong>Day22</strong>
             </span>
         </a>
         
@@ -251,7 +271,7 @@
                     </a>
                 </li>
                 
-                <li class="series-chapter is-current">
+                <li class="series-chapter">
                     <a href="/2026/08/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day3/" title="心理健康助手-ai-Day3">
                         <span class="chapter-no">Day3</span>
                         <span class="chapter-title">心理健康助手-ai-Day3</span>
@@ -411,7 +431,7 @@
                     </a>
                 </li>
                 
-                <li class="series-chapter">
+                <li class="series-chapter is-current">
                     <a href="/2026/09/20/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day23/" title="心理健康助手-ai-Day23">
                         <span class="chapter-no">Day23</span>
                         <span class="chapter-title">心理健康助手-ai-Day23</span>
@@ -430,10 +450,10 @@
             </ul>
         </details>
         
-        <a class="series-nav-link next" href="/2026/08/17/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day4/">
+        <a class="series-nav-link next" href="/2026/09/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day24/">
             <span>
                 <em>下一章</em>
-                <strong>Day4</strong>
+                <strong>Day24</strong>
             </span>
             <i class="fa-solid fa-arrow-right fa-fw"></i>
         </a>

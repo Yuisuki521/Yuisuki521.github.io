@@ -211,7 +211,7 @@
 <span id="more"></span>
 <h1 id="1-JWT认证和token创建"><a href="#1-JWT认证和token创建" class="headerlink" title="1.JWT认证和token创建"></a>1.JWT认证和token创建</h1><p>token有三部分头部 载荷 签证，头部为声明方式，加密算法，载荷为数据部分。使用外部插件实现JWT引入java-jwt；在yml文件里给jwt设置配置；接下来在config里设置配置项新建文件JwtConfig，将在yml文件里配置的属性定义，通过@ConfigurationProperties(prefix&#x3D;”jwt”)指定将数据传入进来，加@Data和@Compenent；新建util文件夹新建JwtTokenUtil文件，在JwtTokenUtil创建生成token的方法generateToken，传入userId,username roleType，接下来需要传入jwtConfig里的属性，通过传入上下文处理，首先要继承ApplicationContextAware接口，对里面的方法进行重写<br>@Override<br>public void setApplicationContext(ApplicationContext applicationContext) {<br>    JwtTokenUtil.applicationContext(上方已定义) &#x3D; applicationContext;<br>}<br>private static JwtConfig getJwtConfig() {<br>    return applicationContext.getBean(JwtConfig.class); &#x2F;&#x2F;拿到定义好的jwt属性<br>};<br>接下来获取jwt属性，直接通过getJwtConfig()拿到jwt属性<br>Algorithm algorithm &#x3D; Algorithm.HMAC256(jwtConfig.getSecret()); &#x2F;&#x2F;生成签名的算法<br>Date expiration &#x3D; new Date(System.currentTimeMillis() + jwtConfig.getExpiration()); &#x2F;&#x2F;生成过期时间<br>String token &#x3D; JWT.create()<br>        .withClaim(“userId”, userId)<br>        .withClaim(“username”, username)<br>        .withClaim(“roleType”, roleType)<br>        .withExpiresAt(expiration) &#x2F;&#x2F; 设置过期时间<br>        .withIssuedAt(new Date()) &#x2F;&#x2F; 设置签发时间<br>        .withIssuer(ISSUER) &#x2F;&#x2F; 设置签发者，在上方定义<br>        .sign(algorithm);<br>return token;最后try catch一下。</p>
 <h1 id="2-实现注册接口"><a href="#2-实现注册接口" class="headerlink" title="2.实现注册接口"></a>2.实现注册接口</h1><p>在controller层继续注册接口&#x2F;add，返回结果为用户表的信息UserLoginResponseDTO.UserDetailResponseDTO，注册内容也需要进行校验，需要定义实体类在command新建UserRegisterCommandDTO，定义属性添加Data注解校验逻辑，在安全校验添加此接口,通过调用userService.register(commandDTO)。<br>回到service层，定义方法register返回类型UserLoginResponseDTO.UserDetailResponseDTO,引入hutool工具可以在后台打印出，通过JSONUtil.parseObj(commandDTO)就可以打印出commmand的json格式数据。接下来实现验证两次密码输入一致的逻辑通过commandDTO.getPassword()拿到数据比较再次输入的密码；接下来验证用户名是否存在，首先构建查询条件，新建LambdaQueryWrapper类型类queryWrapper，传入User，调用eq方法进行比较，构建好了查询条件，然后判断这个用户名数量如果大于0，那么用户名已经存在；接下来检查邮箱是否存在，一样的流程；验证用户类型，在UserType里的isValidCode方法可以将传入数据进行比较是否为枚举类，直接使用这个方法判断用户类型；最后一部是创建用户，需要将数据插入进数据库，用同样方法进行密码的passwordEncoder.encode(password)(将password定义出来)，然后创建实体类就是使用之前登录的实体类User；接下来需要将拿到的DTO转换为User实体，需要重新构建转化类，在UserConvert新建类<br>public static User registerCommandToEntity(UserRegisterCommandDTO commandDTO, String encodedPassword){}<br>，通过实体类进行构建，在User实体类添加Builder注解，然后通过.builder()方法构建(对照user表)，其中status需要从枚举处拿到正常code，创建好转换为实体的方法后，回到UserService，调用刚才定义的方法，最后插入数据库userMapper.insert()，返回<br>return UserConvert.entityToDetailResponse(user)；可以在controller层对外暴露，验证在数据库可以成功出现新用户。</p>
-<h1 id="3-获取当前用户接口"><a href="#3-获取当前用户接口" class="headerlink" title="3.获取当前用户接口"></a>3.获取当前用户接口</h1>
+
     </div>
     
     
@@ -222,7 +222,7 @@
             心理健康助手 AI 开发日记
         </span>
         <span class="series-progress">
-            18 / 20 章
+            18 / 24 章
         </span>
     </div>
     <div class="series-nav-links">
@@ -400,6 +400,38 @@
                         <span class="chapter-no">Day20</span>
                         <span class="chapter-title">心理健康助手-ai-Day20</span>
                         <span class="chapter-date">9/14</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day21/" title="心理健康助手-ai-Day21">
+                        <span class="chapter-no">Day21</span>
+                        <span class="chapter-title">心理健康助手-ai-Day21</span>
+                        <span class="chapter-date">9/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/19/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day22/" title="心理健康助手-ai-Day22">
+                        <span class="chapter-no">Day22</span>
+                        <span class="chapter-title">心理健康助手-ai-Day22</span>
+                        <span class="chapter-date">9/19</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/20/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day23/" title="心理健康助手-ai-Day23">
+                        <span class="chapter-no">Day23</span>
+                        <span class="chapter-title">心理健康助手-ai-Day23</span>
+                        <span class="chapter-date">9/20</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day24/" title="心理健康助手-ai-Day24">
+                        <span class="chapter-no">Day24</span>
+                        <span class="chapter-title">心理健康助手-ai-Day24</span>
+                        <span class="chapter-date">9/21</span>
                     </a>
                 </li>
                 

@@ -194,11 +194,30 @@
             2026/9/14
         </span>
         
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
         
     </div>
     
     <div class="content" v-pre>
-        
+        <h1 id="1-从token提取信息"><a href="#1-从token提取信息" class="headerlink" title="1.从token提取信息"></a>1.从token提取信息</h1><p>token存在时，验证token并获取用户信息，再JwtTokenUtil里封装方法validateToken用来验证token返回类型为TokenVerificationResult(创建token验证结果封装类TokenVerificationResult，添加属性和构造函数)，将token传递进去，需要先验证是否为有效token(封装方法verifyToken返回类型为DEcodedJWT，判断token格式是否合法，如果非法抛出错误，合法时进行解码<br>        JwtConfig jwtConfig &#x3D; getJwtConfig();<br>        Algorithm algorithm &#x3D; Algorithm.HMAC256(jwtConfig.getSecret());<br>        JWTVerifier verifier &#x3D; JWT.require(algorithm)<br>                .withIssuer(ISSUER)<br>                .build();)<br>调用方法verifyToken，然后接收数据，调用DecodedJWT的get方法，进行类型转换后拿到解码后信息，角色类型需要<br>Integer roleType &#x3D; null;<br>        try{<br>            roleType &#x3D; jwt.getClaim(“roleType”).asInt();<br>        }catch (Exception e){<br>            String roleTypeStr &#x3D; jwt.getClaim(“roleType”).asString();<br>            if(StringUtils.hasText(roleTypeStr)){<br>                roleType &#x3D; Integer.valueOf(roleTypeStr);<br>            }<br>        }</p>
+<p>还需要再判断userId !&#x3D; null &amp;&amp; StringUtils.hasText(username) &amp;&amp; roleType !&#x3D; null，拿到token有意义的数据，最后回到验证方法里调用方法，将token传入，用validationResult接收有效数据，如果validationResult不为空，并且validationResult.isValid()不为空，那么根据解密出来的userId查询用户信息验证用户状态，在UserService层中创建方法getUserById，返回类型为UserLoginResponseDTO.UserDetailResponseDTO，传入token中解码的userId，通过userMapper.selectById方法查询，然后拿到用户数据user，如果user为null对外抛出异常，为正常数据时将用户实体转换为响应类，否则清除上下文再给前端返回结果枚举里的token错误。<br>然后回到过滤器引入并调用userService.getUserById(validationResult.getUserId)，用user接收一下，将user数据JSONUtil.parseObj(user)打印查看结果是否合理；接下来将查询的数据进行判断user !&#x3D; null &amp;&amp; UserStatus.NORMAL.getCode().equals(user.getStatus())，如果没问题，<br>接下来创建Spring Security认证对象<br> List<SimpleGrantedAuthority> authorities &#x3D; Collections.singletonList(new SimpleGrantedAuthority(“ROLE_” + validationResult.getRoleType()));<br>然后创建UsernamePasswordAuthenticationToken对象<br> UsernamePasswordAuthenticationToken authcation &#x3D; new UsernamePasswordAuthenticationToken(validationResult.getUsername(), null, authorities);<br>设置认证信息到Spring Security上下文<br>SecurityContextHolder.getContext().setAuthentication(authcation);<br>最后将token存贮到请求的属性中<br> request.setAttribute(“jwtToken”, token);<br>回到controller层，处理从token中解析出用户的id逻辑，需要封装方法获取jwtToken，在JwtTokenUtil中<br> public static String getCurrentToken() {<br>        ServletRequestAttributes attributes &#x3D; (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();<br>        if(attributes !&#x3D; null){<br>            HttpServletRequest request &#x3D; attributes.getRequest();<br>            String token &#x3D; (String) request.getAttribute(“jwtToken”);<br>            if(token !&#x3D; null){<br>                return token;<br>            }</p>
+<pre><code>        //从请求头中获取token
+        String headerToken = extractTokenFromRequest(request);
+        return headerToken;
+    }
+    return null;
+}
+</code></pre>
+<p>回到controller层<br> &#x2F;&#x2F;从token中获取用户ID<br> String token &#x3D; JwtTokenUtil.getCurrentToken();<br> DecodedJWT jwt &#x3D; JwtTokenUtil.verifyToken(token);<br> Long userId &#x3D; jwt.getClaim(“userId”).asLong();<br> &#x2F;&#x2F;调用服务层获取用户详情方法<br> UserLoginResponseDTO.UserDetailResponseDTO result &#x3D; userService.getUserById(userId);<br>；否则抛出用户异常，清除上下文打印错误</p>
+
     </div>
     
     
@@ -209,7 +228,7 @@
             心理健康助手 AI 开发日记
         </span>
         <span class="series-progress">
-            20 / 20 章
+            20 / 24 章
         </span>
     </div>
     <div class="series-nav-links">
@@ -390,16 +409,48 @@
                     </a>
                 </li>
                 
+                <li class="series-chapter">
+                    <a href="/2026/09/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day21/" title="心理健康助手-ai-Day21">
+                        <span class="chapter-no">Day21</span>
+                        <span class="chapter-title">心理健康助手-ai-Day21</span>
+                        <span class="chapter-date">9/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/19/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day22/" title="心理健康助手-ai-Day22">
+                        <span class="chapter-no">Day22</span>
+                        <span class="chapter-title">心理健康助手-ai-Day22</span>
+                        <span class="chapter-date">9/19</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/20/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day23/" title="心理健康助手-ai-Day23">
+                        <span class="chapter-no">Day23</span>
+                        <span class="chapter-title">心理健康助手-ai-Day23</span>
+                        <span class="chapter-date">9/20</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day24/" title="心理健康助手-ai-Day24">
+                        <span class="chapter-no">Day24</span>
+                        <span class="chapter-title">心理健康助手-ai-Day24</span>
+                        <span class="chapter-date">9/21</span>
+                    </a>
+                </li>
+                
             </ul>
         </details>
         
-        <span class="series-nav-link next disabled">
+        <a class="series-nav-link next" href="/2026/09/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day21/">
             <span>
                 <em>下一章</em>
-                <strong>已经是最新章</strong>
+                <strong>Day21</strong>
             </span>
             <i class="fa-solid fa-arrow-right fa-fw"></i>
-        </span>
+        </a>
         
     </div>
 </div>
