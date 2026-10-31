@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>心理健康助手-ai-Day25 | Yuisuki&#39;s home</title>
+    <meta name="author" content="Yuisuki521" />
+    <meta name="description" content="Love, games, and anime" />
+    <meta name="keywords" content="Love, games, and anime" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>YUISUKI&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;YUISUKI&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>心理健康助手-ai-Day25</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/24
+        </span>
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="1-登出接口"><a href="#1-登出接口" class="headerlink" title="1.登出接口"></a>1.登出接口</h1><p>在controller层新建接口，在util文件夹下新建TokenBlacklistManager用来进行token的黑名单管理，<br>key为token,value为token的过期时间戳<br> private final Map&lt;String, Long&gt; blacklist &#x3D; new ConcurrentHashMap&lt;&gt;();<br>将token加入黑名单方法<br> public void blacklist(String token, long expireAt) {}<br>判断token是否已注销<br> public boolean isBlacklisted(String token) {}<br>清理已过期的黑名单token<br> private void cleanExpired() {}<br>回到UserService层，引入，创建登出方法<br>用户退出登录,将token加入黑名单使其立即失效<br> public void logout(String token) {<br> &#x2F;&#x2F;空token直接忽略<br> if(!StringUtils.hasText(token)){<br> return;<br> }<br> &#x2F;&#x2F;解析token获取过期时间,无效token直接忽略<br> DecodedJWT jwt &#x3D; JwtTokenUtil.verifyToken(token);<br> Date expireAt &#x3D; jwt.getExpiresAt();<br> &#x2F;&#x2F;加入黑名单,在token自然过期前不再生效<br> tokenBlacklistManager.blacklist(token, expireAt !&#x3D; null ? expireAt.getTime() : System.currentTimeMillis());<br>    }<br>还要在jwt过滤器里对已注销的token直接拒绝提取token，至9.29，接口做完。</p>
+
+    </div>
+    
+    
+<div class="series-nav">
+    <div class="series-nav-head">
+        <span class="series-nav-name">
+            <i class="fa-solid fa-layer-group fa-fw"></i>
+            心理健康助手 AI 开发日记
+        </span>
+        <span class="series-progress">
+            25 / 25 章
+        </span>
+    </div>
+    <div class="series-nav-links">
+        
+        <a class="series-nav-link prev" href="/2026/09/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day24/">
+            <i class="fa-solid fa-arrow-left fa-fw"></i>
+            <span>
+                <em>上一章</em>
+                <strong>Day24</strong>
+            </span>
+        </a>
+        
+        <details class="series-details series-nav-details">
+            <summary>
+                <i class="fa-solid fa-list-check fa-fw"></i>
+                <span>章节目录</span>
+                <i class="fa-solid fa-chevron-down fa-fw series-chevron"></i>
+            </summary>
+            <ul class="series-chapters">
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day1/" title="心理健康助手+ai Day1">
+                        <span class="chapter-no">Day1</span>
+                        <span class="chapter-title">心理健康助手+ai Day1</span>
+                        <span class="chapter-date">8/14</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/15/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day2/" title="心理健康助手-ai-Day2">
+                        <span class="chapter-no">Day2</span>
+                        <span class="chapter-title">心理健康助手-ai-Day2</span>
+                        <span class="chapter-date">8/15</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day3/" title="心理健康助手-ai-Day3">
+                        <span class="chapter-no">Day3</span>
+                        <span class="chapter-title">心理健康助手-ai-Day3</span>
+                        <span class="chapter-date">8/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/17/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day4/" title="心理健康助手-ai-Day4">
+                        <span class="chapter-no">Day4</span>
+                        <span class="chapter-title">心理健康助手-ai-Day4</span>
+                        <span class="chapter-date">8/17</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/18/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day5/" title="心理健康助手-ai-Day5">
+                        <span class="chapter-no">Day5</span>
+                        <span class="chapter-title">心理健康助手-ai-Day5</span>
+                        <span class="chapter-date">8/18</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/20/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day6/" title="心理健康助手-ai-Day6">
+                        <span class="chapter-no">Day6</span>
+                        <span class="chapter-title">心理健康助手-ai-Day6</span>
+                        <span class="chapter-date">8/20</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day7/" title="心理健康助手-ai-Day7">
+                        <span class="chapter-no">Day7</span>
+                        <span class="chapter-title">心理健康助手-ai-Day7</span>
+                        <span class="chapter-date">8/21</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/22/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day8/" title="心理健康助手-ai-Day8">
+                        <span class="chapter-no">Day8</span>
+                        <span class="chapter-title">心理健康助手-ai-Day8</span>
+                        <span class="chapter-date">8/22</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/23/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day9/" title="心理健康助手-ai-Day9">
+                        <span class="chapter-no">Day9</span>
+                        <span class="chapter-title">心理健康助手-ai-Day9</span>
+                        <span class="chapter-date">8/23</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/24/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day10/" title="心理健康助手-ai-Day10">
+                        <span class="chapter-no">Day10</span>
+                        <span class="chapter-title">心理健康助手-ai-Day10</span>
+                        <span class="chapter-date">8/24</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/25/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day11/" title="心理健康助手-ai-Day11">
+                        <span class="chapter-no">Day11</span>
+                        <span class="chapter-title">心理健康助手-ai-Day11</span>
+                        <span class="chapter-date">8/25</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/27/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day12/" title="心理健康助手-ai-Day12">
+                        <span class="chapter-no">Day12</span>
+                        <span class="chapter-title">心理健康助手-ai-Day12</span>
+                        <span class="chapter-date">8/27</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/08/29/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day13/" title="心理健康助手-ai-Day13">
+                        <span class="chapter-no">Day13</span>
+                        <span class="chapter-title">心理健康助手-ai-Day13</span>
+                        <span class="chapter-date">8/29</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/04/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day14/" title="心理健康助手-ai-Day14">
+                        <span class="chapter-no">Day14</span>
+                        <span class="chapter-title">心理健康助手-ai-Day14</span>
+                        <span class="chapter-date">9/4</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/06/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day15/" title="心理健康助手-ai-Day15">
+                        <span class="chapter-no">Day15</span>
+                        <span class="chapter-title">心理健康助手-ai-Day15</span>
+                        <span class="chapter-date">9/6</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/07/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day16/" title="心理健康助手-ai-Day16">
+                        <span class="chapter-no">Day16</span>
+                        <span class="chapter-title">心理健康助手-ai-Day16</span>
+                        <span class="chapter-date">9/7</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/08/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day17/" title="心理健康助手-ai-Day17">
+                        <span class="chapter-no">Day17</span>
+                        <span class="chapter-title">心理健康助手-ai-Day17</span>
+                        <span class="chapter-date">9/8</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/09/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day18/" title="心理健康助手-ai-Day18">
+                        <span class="chapter-no">Day18</span>
+                        <span class="chapter-title">心理健康助手-ai-Day18</span>
+                        <span class="chapter-date">9/9</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/12/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day19/" title="心理健康助手-ai-Day19">
+                        <span class="chapter-no">Day19</span>
+                        <span class="chapter-title">心理健康助手-ai-Day19</span>
+                        <span class="chapter-date">9/12</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/14/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day20/" title="心理健康助手-ai-Day20">
+                        <span class="chapter-no">Day20</span>
+                        <span class="chapter-title">心理健康助手-ai-Day20</span>
+                        <span class="chapter-date">9/14</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/16/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day21/" title="心理健康助手-ai-Day21">
+                        <span class="chapter-no">Day21</span>
+                        <span class="chapter-title">心理健康助手-ai-Day21</span>
+                        <span class="chapter-date">9/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/19/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day22/" title="心理健康助手-ai-Day22">
+                        <span class="chapter-no">Day22</span>
+                        <span class="chapter-title">心理健康助手-ai-Day22</span>
+                        <span class="chapter-date">9/19</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/20/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day23/" title="心理健康助手-ai-Day23">
+                        <span class="chapter-no">Day23</span>
+                        <span class="chapter-title">心理健康助手-ai-Day23</span>
+                        <span class="chapter-date">9/20</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/09/21/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day24/" title="心理健康助手-ai-Day24">
+                        <span class="chapter-no">Day24</span>
+                        <span class="chapter-title">心理健康助手-ai-Day24</span>
+                        <span class="chapter-date">9/21</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter is-current">
+                    <a href="/2026/09/24/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E6%96%87%E6%A1%A3/%E5%BF%83%E7%90%86%E5%81%A5%E5%BA%B7%E5%8A%A9%E6%89%8B-ai-Day25/" title="心理健康助手-ai-Day25">
+                        <span class="chapter-no">Day25</span>
+                        <span class="chapter-title">心理健康助手-ai-Day25</span>
+                        <span class="chapter-date">9/24</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </details>
+        
+        <span class="series-nav-link next disabled">
+            <span>
+                <em>下一章</em>
+                <strong>已经是最新章</strong>
+            </span>
+            <i class="fa-solid fa-arrow-right fa-fw"></i>
+        </span>
+        
+    </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Yuisuki&#39;s home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuisuki521
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
