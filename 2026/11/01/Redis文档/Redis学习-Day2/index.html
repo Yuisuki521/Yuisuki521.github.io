@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Redis学习-Day2 | Yuisuki&#39;s home</title>
+    <meta name="author" content="Yuisuki521" />
+    <meta name="description" content="Love, games, and anime" />
+    <meta name="keywords" content="Love, games, and anime" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>YUISUKI&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;YUISUKI&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Redis学习-Day2</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/11/1
+        </span>
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>Redis的java客户端这里介绍两种Jedis和SpringDataRedis</p>
+<span id="more"></span>
+<h1 id="1-Jedis"><a href="#1-Jedis" class="headerlink" title="1.Jedis"></a>1.Jedis</h1><h2 id="基础导入java"><a href="#基础导入java" class="headerlink" title="基础导入java"></a>基础导入java</h2><h3 id="引入依赖-建立联系"><a href="#引入依赖-建立联系" class="headerlink" title="引入依赖 建立联系"></a>引入依赖 建立联系</h3><p>private Jedis jedis;<br>@BeforeEach<br>void setUp() {<br>    &#x2F;&#x2F; 建立连接<br>    jedis &#x3D; new Jedis(“Redis端口”, 端口号);<br>    &#x2F;&#x2F; 设置密码<br>    jedis.auth(“密码”);<br>    &#x2F;&#x2F; 选择库<br>    jedis.select(0);<br>}</p>
+<h3 id="测试string"><a href="#测试string" class="headerlink" title="测试string"></a>测试string</h3><p>@Test<br>void testString() {<br>    &#x2F;&#x2F; 插入数据<br>    String result &#x3D; jedis.set(“name”, “张三”);<br>    System.out.println(“result &#x3D; “ + result);<br>    &#x2F;&#x2F; 获取数据<br>    String name &#x3D; jedis.get(“name”);<br>    System.out.println(“name &#x3D; “ + name);<br>}</p>
+<h3 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h3><p>@AfterEach<br>void tearDown() {<br>    &#x2F;&#x2F; 释放资源<br>    if (jedis !&#x3D; null) {<br>        jedis.close();<br>    }<br>}</p>
+<h2 id="Jedis连接池"><a href="#Jedis连接池" class="headerlink" title="Jedis连接池"></a>Jedis连接池</h2><p>Jedis本身线程不安全，频繁创建销毁和创建有性能损耗，所以可用Jedis连接池代替Jedis<br>public class JedisConnectionFactory {<br>    private static final JedisPool jedisPool;</p>
+<pre><code>static {
+    JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+    // 最大连接
+    jedisPoolConfig.setMaxTotal(8);
+    // 最大空闲连接
+    jedisPoolConfig.setMaxIdle(8);
+    // 最小空闲连接
+    jedisPoolConfig.setMinIdle(0);
+    // 设置最长等待时间，ms
+    jedisPoolConfig.setMaxWaitMillis(200);
+    jedisPool = new JedisPool(jedisPoolConfig, &quot;Redis端口&quot;, 端口号
+            1000, &quot;密码&quot;);
+}
+
+// 获取Jedis对象
+public static Jedis getJedis(){
+    return jedisPool.getResource();
+}
+</code></pre>
+<p>}</p>
+<h1 id="SpringDataRedis"><a href="#SpringDataRedis" class="headerlink" title="SpringDataRedis"></a>SpringDataRedis</h1><h2 id="SpringDataRedis快速入门"><a href="#SpringDataRedis快速入门" class="headerlink" title="SpringDataRedis快速入门"></a>SpringDataRedis快速入门</h2><p>SpringDataRedis提供了<code>RedisTemplate</code>工具类，封装Redis各类操作</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>返回值类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>redisTemplate.opsForValue()</td>
+<td>ValueOperations</td>
+<td>操作String类型数据</td>
+</tr>
+<tr>
+<td>redisTemplate.opsForHash()</td>
+<td>HashOperations</td>
+<td>操作Hash类型数据</td>
+</tr>
+<tr>
+<td>redisTemplate.opsForList()</td>
+<td>ListOperations</td>
+<td>操作List类型数据</td>
+</tr>
+<tr>
+<td>redisTemplate.opsForSet()</td>
+<td>SetOperations</td>
+<td>操作Set类型数据</td>
+</tr>
+<tr>
+<td>redisTemplate.opsForZSet()</td>
+<td>ZSetOperations</td>
+<td>操作SortedSet类型数据</td>
+</tr>
+<tr>
+<td>redisTemplate</td>
+<td>—</td>
+<td>通用的命令</td>
+</tr>
+</tbody></table>
+<h2 id="基础导入java-1"><a href="#基础导入java-1" class="headerlink" title="基础导入java"></a>基础导入java</h2><h3 id="引入Redis依赖-连接池依赖"><a href="#引入Redis依赖-连接池依赖" class="headerlink" title="引入Redis依赖 连接池依赖"></a>引入Redis依赖 连接池依赖</h3><p>spring-boot-starter-data-redis和commons-pool2</p>
+<h3 id="配置yaml文件"><a href="#配置yaml文件" class="headerlink" title="配置yaml文件"></a>配置yaml文件</h3><p>spring:<br>  redis:<br>    host: 192.168.150.101<br>    port: 6379<br>    password: 123321<br>    lettuce:<br>      pool:<br>        max-active: 8  最大连接<br>        max-idle: 8    最大空闲连接<br>        min-idle: 0    最小空闲连接<br>        max-wait: 100  连接等待时间</p>
+<h3 id="注入RedisTemplate"><a href="#注入RedisTemplate" class="headerlink" title="注入RedisTemplate"></a>注入RedisTemplate</h3><p>@Autowired<br>private RedisTemplate redisTemplate;</p>
+<h3 id="编写测试"><a href="#编写测试" class="headerlink" title="编写测试"></a>编写测试</h3><p>@SpringBootTest<br>public class RedisTest {</p>
+<pre><code>@Autowired
+private RedisTemplate redisTemplate;
+
+@Test
+void testString() {
+    // 插入一条string类型数据
+    redisTemplate.opsForValue().set(&quot;name&quot;, &quot;李四&quot;);
+    // 读取一条string类型数据
+    Object name = redisTemplate.opsForValue().get(&quot;name&quot;);
+    System.out.println(&quot;name = &quot; + name);
+}
+</code></pre>
+<p>}</p>
+
+    </div>
+    
+    
+<div class="series-nav">
+    <div class="series-nav-head">
+        <span class="series-nav-name">
+            <i class="fa-solid fa-layer-group fa-fw"></i>
+            Redis学习日志
+        </span>
+        <span class="series-progress">
+            2 / 2 章
+        </span>
+    </div>
+    <div class="series-nav-links">
+        
+        <a class="series-nav-link prev" href="/2026/10/31/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day1/">
+            <i class="fa-solid fa-arrow-left fa-fw"></i>
+            <span>
+                <em>上一章</em>
+                <strong>Day1</strong>
+            </span>
+        </a>
+        
+        <details class="series-details series-nav-details">
+            <summary>
+                <i class="fa-solid fa-list-check fa-fw"></i>
+                <span>章节目录</span>
+                <i class="fa-solid fa-chevron-down fa-fw series-chevron"></i>
+            </summary>
+            <ul class="series-chapters">
+                
+                <li class="series-chapter">
+                    <a href="/2026/10/31/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day1/" title="Redis学习-Day1">
+                        <span class="chapter-no">Day1</span>
+                        <span class="chapter-title">Redis学习-Day1</span>
+                        <span class="chapter-date">10/31</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter is-current">
+                    <a href="/2026/11/01/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day2/" title="Redis学习-Day2">
+                        <span class="chapter-no">Day2</span>
+                        <span class="chapter-title">Redis学习-Day2</span>
+                        <span class="chapter-date">11/1</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </details>
+        
+        <span class="series-nav-link next disabled">
+            <span>
+                <em>下一章</em>
+                <strong>已经是最新章</strong>
+            </span>
+            <i class="fa-solid fa-arrow-right fa-fw"></i>
+        </span>
+        
+    </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Yuisuki&#39;s home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuisuki521
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
