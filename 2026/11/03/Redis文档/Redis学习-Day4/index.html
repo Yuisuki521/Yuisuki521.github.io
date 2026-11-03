@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Redis学习-Day4 | Yuisuki&#39;s home</title>
+    <meta name="author" content="Yuisuki521" />
+    <meta name="description" content="Love, games, and anime" />
+    <meta name="keywords" content="Love, games, and anime" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>YUISUKI&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;YUISUKI&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Redis学习-Day4</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/11/3
+        </span>
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="基于Redis实现Session登录"><a href="#基于Redis实现Session登录" class="headerlink" title="基于Redis实现Session登录"></a>基于Redis实现Session登录</h1><h2 id="发送短信验证码"><a href="#发送短信验证码" class="headerlink" title="发送短信验证码"></a>发送短信验证码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[提交手机号]</span><br><span class="line">    B --&gt; C&#123;校验手机号格式&#125;</span><br><span class="line">    C -- 不符合 --&gt; Z([结束])</span><br><span class="line">    C -- 符合 --&gt; D[生成验证码]</span><br><span class="line">    D --&gt; E[保存验证码到 session]</span><br><span class="line">    E --&gt; F[发送验证码]</span><br><span class="line">    F --&gt; Z</span><br></pre></td></tr></table></figure>
+
+<h2 id="短信验证码登录、注册"><a href="#短信验证码登录、注册" class="headerlink" title="短信验证码登录、注册"></a>短信验证码登录、注册</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[提交手机号和验证码]</span><br><span class="line">    B --&gt; C&#123;校验验证码是否一致&#125;</span><br><span class="line">    C -- 不一致 --&gt; Z([结束])</span><br><span class="line">    C -- 一致 --&gt; D[根据手机号查询用户]</span><br><span class="line">    D --&gt; E&#123;用户是否存在&#125;</span><br><span class="line">    E -- 存在 --&gt; F[保存用户到 session]</span><br><span class="line">    F --&gt; Z</span><br><span class="line">    E -- 不存在 --&gt; G[创建新用户]</span><br><span class="line">    G --&gt; H[保存用户到数据库]</span><br><span class="line">    H --&gt; F</span><br></pre></td></tr></table></figure>
+
+<h2 id="校验登录状态"><a href="#校验登录状态" class="headerlink" title="校验登录状态"></a>校验登录状态</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[请求并携带 cookie]</span><br><span class="line">    B --&gt; C[从 session 获取用户]</span><br><span class="line">    C --&gt; D&#123;判断用户是否存在&#125;</span><br><span class="line">    D -- 存在 --&gt; E[保存用户到 ThreadLocal]</span><br><span class="line">    E --&gt; F[放行]</span><br><span class="line">    F --&gt; Z([结束])</span><br><span class="line">    D -- 不存在 --&gt; G[拦截]</span><br><span class="line">    G --&gt; Z</span><br></pre></td></tr></table></figure>
+<p>然而集群环境下，session的共享问题是一个常见的问题，需要在多个节点之间同步session数据，以确保用户在不同节点之间的登录状态一致，多台tomcat并不共享session存储空间，当请求到达不同的tomcat服务时，会导致数据丢失问题，虽然说可以复制session数据，但是会增加存储成本，且在高并发环境下，复制session数据会导致性能问题。<br>所以，基于Redis实现session登录是一种常见的解决方案，它可以在多个节点之间同步session数据，以确保用户在不同节点之间的登录状态一致，同时也可以避免复制session数据导致的性能问题。<br>发送短信验证码时，生成验证码要保存到redis中，Redis中的value就用string类型，但是key不能直接用session的id，因为不同浏览器生成的session id是不同的，所以不能直接用session id作为key，而要使用手机号作为key。还有当我们短信验证码登录注册时，就可以根据手机号查询用户，校验验证码。登陆后保存用户到redis，这里我们保存的是一个对象所以用hash结构较好，也方便对单个信息增删改查，而且要将来方便客户端携带key，如果用手机号，会保存在前端浏览器不安全，所以我们用一个随机的token为key，最后我们还要把token给客户端，以后登录我们就可以基于token从Redis获取拿到用户信息。</p>
+<h2 id="拦截器校验登录状态"><a href="#拦截器校验登录状态" class="headerlink" title="拦截器校验登录状态"></a>拦截器校验登录状态</h2><p>登录成功后，客户端每次请求都在请求头authorization字段携带 token，拦截器 preHandle方法的处理逻辑如下：<br>从request.getHeader(“authorization”) 取出 token，判空 — token 为空直接拦截，返回 HTTP 401 状态码<br>用LOGIN_USER_KEY + token 拼接 Redis key，通过opsForHash().entries() 取出 Redis Hash 中存储的用户数据 Map<br>判断 Map 是否为空 — 空则说明 Redis 中没有对应用户（token 过期或伪造），拦截返回 401<br>将 Redis 返回的 Map 转为 UserDTO 对象，存入ThreadLocal(UserHolder.saveUser)，方便后续业务代码直接获取当前用户<br>调用stringRedisTemplate.expire()刷新token的有效期，实现”活跃用户不过期”的效果</p>
+<h3 id="登录拦截器的优化"><a href="#登录拦截器的优化" class="headerlink" title="登录拦截器的优化"></a>登录拦截器的优化</h3><p>如果用户一直访问不需要登录的页面，拦截器就不会生效不会刷新token的有效期，导致用户登录过期。为了解决，我们可以在现在的拦截器前新加一个拦截器来做刷新工作，最后第一个拦截器做刷新，第二个做登录是否放行，调节拦截器优先顺序。</p>
+
+    </div>
+    
+    
+<div class="series-nav">
+    <div class="series-nav-head">
+        <span class="series-nav-name">
+            <i class="fa-solid fa-layer-group fa-fw"></i>
+            Redis学习日志
+        </span>
+        <span class="series-progress">
+            4 / 4 章
+        </span>
+    </div>
+    <div class="series-nav-links">
+        
+        <a class="series-nav-link prev" href="/2026/11/02/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day3/">
+            <i class="fa-solid fa-arrow-left fa-fw"></i>
+            <span>
+                <em>上一章</em>
+                <strong>Day3</strong>
+            </span>
+        </a>
+        
+        <details class="series-details series-nav-details">
+            <summary>
+                <i class="fa-solid fa-list-check fa-fw"></i>
+                <span>章节目录</span>
+                <i class="fa-solid fa-chevron-down fa-fw series-chevron"></i>
+            </summary>
+            <ul class="series-chapters">
+                
+                <li class="series-chapter">
+                    <a href="/2026/10/31/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day1/" title="Redis学习-Day1">
+                        <span class="chapter-no">Day1</span>
+                        <span class="chapter-title">Redis学习-Day1</span>
+                        <span class="chapter-date">10/31</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/01/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day2/" title="Redis学习-Day2">
+                        <span class="chapter-no">Day2</span>
+                        <span class="chapter-title">Redis学习-Day2</span>
+                        <span class="chapter-date">11/1</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/02/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day3/" title="Redis学习-Day3">
+                        <span class="chapter-no">Day3</span>
+                        <span class="chapter-title">Redis学习-Day3</span>
+                        <span class="chapter-date">11/2</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter is-current">
+                    <a href="/2026/11/03/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day4/" title="Redis学习-Day4">
+                        <span class="chapter-no">Day4</span>
+                        <span class="chapter-title">Redis学习-Day4</span>
+                        <span class="chapter-date">11/3</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </details>
+        
+        <span class="series-nav-link next disabled">
+            <span>
+                <em>下一章</em>
+                <strong>已经是最新章</strong>
+            </span>
+            <i class="fa-solid fa-arrow-right fa-fw"></i>
+        </span>
+        
+    </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Yuisuki&#39;s home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuisuki521
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
