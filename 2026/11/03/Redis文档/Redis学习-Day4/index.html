@@ -207,10 +207,25 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="基于Redis实现Session登录"><a href="#基于Redis实现Session登录" class="headerlink" title="基于Redis实现Session登录"></a>基于Redis实现Session登录</h1><h2 id="发送短信验证码"><a href="#发送短信验证码" class="headerlink" title="发送短信验证码"></a>发送短信验证码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[提交手机号]</span><br><span class="line">    B --&gt; C&#123;校验手机号格式&#125;</span><br><span class="line">    C -- 不符合 --&gt; Z([结束])</span><br><span class="line">    C -- 符合 --&gt; D[生成验证码]</span><br><span class="line">    D --&gt; E[保存验证码到 session]</span><br><span class="line">    E --&gt; F[发送验证码]</span><br><span class="line">    F --&gt; Z</span><br></pre></td></tr></table></figure>
-
-<h2 id="短信验证码登录、注册"><a href="#短信验证码登录、注册" class="headerlink" title="短信验证码登录、注册"></a>短信验证码登录、注册</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[提交手机号和验证码]</span><br><span class="line">    B --&gt; C&#123;校验验证码是否一致&#125;</span><br><span class="line">    C -- 不一致 --&gt; Z([结束])</span><br><span class="line">    C -- 一致 --&gt; D[根据手机号查询用户]</span><br><span class="line">    D --&gt; E&#123;用户是否存在&#125;</span><br><span class="line">    E -- 存在 --&gt; F[保存用户到 session]</span><br><span class="line">    F --&gt; Z</span><br><span class="line">    E -- 不存在 --&gt; G[创建新用户]</span><br><span class="line">    G --&gt; H[保存用户到数据库]</span><br><span class="line">    H --&gt; F</span><br></pre></td></tr></table></figure>
-
+        <h1 id="基于Redis实现Session登录"><a href="#基于Redis实现Session登录" class="headerlink" title="基于Redis实现Session登录"></a>基于Redis实现Session登录</h1><h2 id="发送短信验证码"><a href="#发送短信验证码" class="headerlink" title="发送短信验证码"></a>发送短信验证码</h2><pre><code>A([开始]) --&gt; B[提交手机号]
+B --&gt; C{校验手机号格式}
+C -- 不符合 --&gt; Z([结束])
+C -- 符合 --&gt; D[生成验证码]
+D --&gt; E[保存验证码到 session]
+E --&gt; F[发送验证码]
+F --&gt; Z
+</code></pre>
+<h2 id="短信验证码登录、注册"><a href="#短信验证码登录、注册" class="headerlink" title="短信验证码登录、注册"></a>短信验证码登录、注册</h2><pre><code>A([开始]) --&gt; B[提交手机号和验证码]
+B --&gt; C{校验验证码是否一致}
+C -- 不一致 --&gt; Z([结束])
+C -- 一致 --&gt; D[根据手机号查询用户]
+D --&gt; E{用户是否存在}
+E -- 存在 --&gt; F[保存用户到 session]
+F --&gt; Z
+E -- 不存在 --&gt; G[创建新用户]
+G --&gt; H[保存用户到数据库]
+H --&gt; F
+</code></pre>
 <h2 id="校验登录状态"><a href="#校验登录状态" class="headerlink" title="校验登录状态"></a>校验登录状态</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A([开始]) --&gt; B[请求并携带 cookie]</span><br><span class="line">    B --&gt; C[从 session 获取用户]</span><br><span class="line">    C --&gt; D&#123;判断用户是否存在&#125;</span><br><span class="line">    D -- 存在 --&gt; E[保存用户到 ThreadLocal]</span><br><span class="line">    E --&gt; F[放行]</span><br><span class="line">    F --&gt; Z([结束])</span><br><span class="line">    D -- 不存在 --&gt; G[拦截]</span><br><span class="line">    G --&gt; Z</span><br></pre></td></tr></table></figure>
 <p>然而集群环境下，session的共享问题是一个常见的问题，需要在多个节点之间同步session数据，以确保用户在不同节点之间的登录状态一致，多台tomcat并不共享session存储空间，当请求到达不同的tomcat服务时，会导致数据丢失问题，虽然说可以复制session数据，但是会增加存储成本，且在高并发环境下，复制session数据会导致性能问题。<br>所以，基于Redis实现session登录是一种常见的解决方案，它可以在多个节点之间同步session数据，以确保用户在不同节点之间的登录状态一致，同时也可以避免复制session数据导致的性能问题。<br>发送短信验证码时，生成验证码要保存到redis中，Redis中的value就用string类型，但是key不能直接用session的id，因为不同浏览器生成的session id是不同的，所以不能直接用session id作为key，而要使用手机号作为key。还有当我们短信验证码登录注册时，就可以根据手机号查询用户，校验验证码。登陆后保存用户到redis，这里我们保存的是一个对象所以用hash结构较好，也方便对单个信息增删改查，而且要将来方便客户端携带key，如果用手机号，会保存在前端浏览器不安全，所以我们用一个随机的token为key，最后我们还要把token给客户端，以后登录我们就可以基于token从Redis获取拿到用户信息。</p>
 <h2 id="拦截器校验登录状态"><a href="#拦截器校验登录状态" class="headerlink" title="拦截器校验登录状态"></a>拦截器校验登录状态</h2><p>登录成功后，客户端每次请求都在请求头authorization字段携带 token，拦截器 preHandle方法的处理逻辑如下：<br>从request.getHeader(“authorization”) 取出 token，判空 — token 为空直接拦截，返回 HTTP 401 状态码<br>用LOGIN_USER_KEY + token 拼接 Redis key，通过opsForHash().entries() 取出 Redis Hash 中存储的用户数据 Map<br>判断 Map 是否为空 — 空则说明 Redis 中没有对应用户（token 过期或伪造），拦截返回 401<br>将 Redis 返回的 Map 转为 UserDTO 对象，存入ThreadLocal(UserHolder.saveUser)，方便后续业务代码直接获取当前用户<br>调用stringRedisTemplate.expire()刷新token的有效期，实现”活跃用户不过期”的效果</p>
@@ -226,7 +241,7 @@
             Redis学习日志
         </span>
         <span class="series-progress">
-            4 / 4 章
+            4 / 6 章
         </span>
     </div>
     <div class="series-nav-links">
@@ -279,16 +294,32 @@
                     </a>
                 </li>
                 
+                <li class="series-chapter">
+                    <a href="/2026/11/04/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day5/" title="Redis学习-Day5">
+                        <span class="chapter-no">Day5</span>
+                        <span class="chapter-title">Redis学习-Day5</span>
+                        <span class="chapter-date">11/4</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/05/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day6/" title="Redis学习-Day6">
+                        <span class="chapter-no">Day6</span>
+                        <span class="chapter-title">Redis学习-Day6</span>
+                        <span class="chapter-date">11/5</span>
+                    </a>
+                </li>
+                
             </ul>
         </details>
         
-        <span class="series-nav-link next disabled">
+        <a class="series-nav-link next" href="/2026/11/04/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day5/">
             <span>
                 <em>下一章</em>
-                <strong>已经是最新章</strong>
+                <strong>Day5</strong>
             </span>
             <i class="fa-solid fa-arrow-right fa-fw"></i>
-        </span>
+        </a>
         
     </div>
 </div>
