@@ -270,6 +270,7 @@ L --&gt; M[释放互斥锁]
 M --&gt; G
 G --&gt; Z([结束])
 </code></pre>
+<h1 id="缓存工具封装"><a href="#缓存工具封装" class="headerlink" title="缓存工具封装"></a>缓存工具封装</h1><p>为什么需要缓存工具封装？因为缓存工具的使用需要频繁调用，而每次调用都需要传递相同的参数，导致代码重复余高，维护成本高。<br>方法1：将任意Java对象序列化为json并存储在string类型的key中，并且可以设置TTL过期时间<br>方法2：将任意Java对象序列化为json并存储在string类型的key中，并且可以设置逻辑过期时间，用于处理缓存击穿问题<br>方法3：根据指定的key查询缓存，并反序列化为指定类型，利用缓存空值的方式解决缓存穿透问题<br>方法4：根据指定的key查询缓存，并反序列化为指定类型，需要利用逻辑过期解决缓存击穿问题</p>
 
     </div>
     
@@ -281,7 +282,7 @@ G --&gt; Z([结束])
             Redis学习日志
         </span>
         <span class="series-progress">
-            6 / 6 章
+            6 / 10 章
         </span>
     </div>
     <div class="series-nav-links">
@@ -350,16 +351,48 @@ G --&gt; Z([结束])
                     </a>
                 </li>
                 
+                <li class="series-chapter">
+                    <a href="/2026/11/06/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day7/" title="Redis学习-Day7">
+                        <span class="chapter-no">Day7</span>
+                        <span class="chapter-title">Redis学习-Day7</span>
+                        <span class="chapter-date">11/6</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/07/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day8/" title="Redis学习-Day8">
+                        <span class="chapter-no">Day8</span>
+                        <span class="chapter-title">Redis学习-Day8</span>
+                        <span class="chapter-date">11/7</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/16/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day9/" title="Redis学习-Day9">
+                        <span class="chapter-no">Day9</span>
+                        <span class="chapter-title">Redis学习-Day9</span>
+                        <span class="chapter-date">11/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/22/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day10/" title="Redis学习-Day10">
+                        <span class="chapter-no">Day10</span>
+                        <span class="chapter-title">Redis学习-Day10</span>
+                        <span class="chapter-date">11/22</span>
+                    </a>
+                </li>
+                
             </ul>
         </details>
         
-        <span class="series-nav-link next disabled">
+        <a class="series-nav-link next" href="/2026/11/06/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day7/">
             <span>
                 <em>下一章</em>
-                <strong>已经是最新章</strong>
+                <strong>Day7</strong>
             </span>
             <i class="fa-solid fa-arrow-right fa-fw"></i>
-        </span>
+        </a>
         
     </div>
 </div>

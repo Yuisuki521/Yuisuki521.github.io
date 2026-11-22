@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Redis学习-Day9 | Yuisuki&#39;s home</title>
+    <meta name="author" content="Yuisuki521" />
+    <meta name="description" content="Love, games, and anime" />
+    <meta name="keywords" content="Love, games, and anime" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://github.com/Yuisuki521/BlogImgs/blob/main/avatar.jpg?raw=true" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>YUISUKI&#39;S HOME</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/categories/study">
+            <i class="fa-solid fa-book-open fa-fw"></i>
+            <span>&ensp;学习</span>
+        </a>
+        
+        <a href="/categories/life">
+            <i class="fa-solid fa-coffee fa-fw"></i>
+            <span>&ensp;生活</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;YUISUKI&#39;S HOME</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/study">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-book-open fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">学习</div>
+                    </div>
+                </a>
+                
+                <a href="/categories/life">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-coffee fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">生活</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Redis学习-Day9</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/11/16
+        </span>
+        
+        <span class="category">
+            <a href="/categories/study/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                学习
+            </a>
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="一人一单"><a href="#一人一单" class="headerlink" title="一人一单"></a>一人一单</h1><p>因为不能让同一个用户全部抢走所有商品，所以需要限制每个用户只能抢走一个商品<br>思路是这样的<br>A([开始]) –&gt; B[提交优惠券id]<br>    B –&gt; C[查询优惠券信息]<br>    C –&gt; D{判断秒杀是否开始}<br>    D – 否 –&gt; X[返回异常结果]<br>    D – 是 –&gt; E{查询用户订单是否存在}<br>    E – 存在 –&gt; X<br>    E – 不存在 –&gt; F{判断库存是否充足}<br>    F – 否 –&gt; X<br>    F – 是 –&gt; G[扣减库存]<br>    G –&gt; H[创建订单]<br>    H –&gt; I[返回订单id]<br>    I –&gt; Z([结束])<br>    X –&gt; Z<br>但是经过测试发现出现问题，没有实现一人一单的效果，还是涉及到并发问题，但是这里是查询是否存在而不是修改数据，所以不用乐观锁，用悲观锁解决，从 查询订单 到 判断订单 到 新增订单 整体加锁，所以对这部分进行封装加锁加事务，加锁部分是针对同一个用户的操作，对用户id进行加锁。但是如果给这部分加锁，事务是等锁释放之后提交，在提交过程中可能其他线程会走进在数据库修改前进行操作，座椅这个锁加的范围有些小了，应该在return前加锁，是先获取锁再进入这个封装的方法。</p>
+<h2 id="一人一单的并发安全问题"><a href="#一人一单的并发安全问题" class="headerlink" title="一人一单的并发安全问题"></a>一人一单的并发安全问题</h2><p>模拟集群使用同一用户id进行操作，发现会出现一人可以下多单情况，两套jvm会有自己的常量池，锁监视器也不同，所以m个jvm至少都会有m个线程同时运行，要解决需要多个jvm使用同一个锁</p>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p>分布式锁是要满足分布式系统或集群模式下多进程可见并且互斥的锁，分布式锁要满足 多进程可见 互斥 高可用 高性能 安全性等要求。<br>基于Redis实现分布式锁需要实现两个基本方法: 获取锁和释放锁。<br>获取锁需要利用setnx的互斥特性，确保只有一个线程获取锁，释放锁需要利用del命令删除锁，手动或超时释放。</p>
+<h4 id="获取锁和释放锁的流程"><a href="#获取锁和释放锁的流程" class="headerlink" title="获取锁和释放锁的流程"></a>获取锁和释放锁的流程</h4><pre><code>A([开始]) --&gt; B[尝试获取锁]
+B --&gt; C{判断结果}
+C -- nil --&gt; D[获取锁失败]
+C -- ok --&gt; E[获取锁成功]
+E --&gt; F[执行业务]
+F --&gt; G[释放锁]
+E -. 业务超时或服务宕机 .-&gt; H[自动释放锁]
+</code></pre>
+<h5 id="会出现问题"><a href="#会出现问题" class="headerlink" title="会出现问题"></a>会出现问题</h5><p>然而还会出现问题<br>问题一:比如线程一获取锁成功，，但是出现了业务阻塞，使其获取锁时间增长超过获取锁的超时时间，就会超时释放，这个时候其他线程就可获取锁成功，然后线程一业务执行完成，就会自动释放锁，然后线程二的锁被释放了，线程二还在做自己的任务，线程三也可以获取锁成功，此时线程安全会再次发生。<br>解决:这个时候要在释放锁的时候，判断锁标识是否是当前线程的就可以解决办法。<br>    A([开始]) –&gt; B[尝试获取锁](存入线程标识 UUID，因为多线程用线程id可能会重复)<br>    B –&gt; C{判断结果}<br>    C – nil –&gt; D[获取锁失败]<br>    C – ok –&gt; E[获取锁成功]<br>    E –&gt; F[执行业务]<br>    F –&gt; F1[判断锁标识是否是当前线程的]<br>    F1 –&gt; G[释放锁]<br>    E -. 业务超时或服务宕机 .-&gt; H[自动释放锁]<br>问题二:当线程一获取锁成功业务执行完成，然后判断标示是否一致，就会释放锁，但是这时释放时产生jvm垃圾回收阻塞，锁就不会释放，很可能会超过超时时间，其他线程来获取锁成功开始线程，线程一阻塞结束，释放锁，就把其他线程的锁释放了。<br>解决:这是需要把判断锁标识的动作和释放锁的动作需要变成原子操作，确保线程安全。使用lua脚本来解决多条命令的原子性问题。<br>问题三:基于setnx的分布式锁有以下问题:<br>不可重入:当a任务需要调用b任务，a拿锁，b也需要这把锁，但是b拿不到，所以成为死锁<br>不可重试:获取锁只尝试一次就返回false，没有重试机制<br>超时释放:仍存在安全问题。<br>主从一致性:比如主线程有了新数据，在给从线程传数据时，突然宕机，从线程就会丢失数据，其他线程可以拿到锁。<br>解决:使用Redission的分布式锁，它支持主从一致性，可以确保在主从集群下，锁的获取和释放是原子操作，不会因为主从一致性问题而导致锁的丢失。</p>
+
+    </div>
+    
+    
+<div class="series-nav">
+    <div class="series-nav-head">
+        <span class="series-nav-name">
+            <i class="fa-solid fa-layer-group fa-fw"></i>
+            Redis学习日志
+        </span>
+        <span class="series-progress">
+            9 / 10 章
+        </span>
+    </div>
+    <div class="series-nav-links">
+        
+        <a class="series-nav-link prev" href="/2026/11/07/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day8/">
+            <i class="fa-solid fa-arrow-left fa-fw"></i>
+            <span>
+                <em>上一章</em>
+                <strong>Day8</strong>
+            </span>
+        </a>
+        
+        <details class="series-details series-nav-details">
+            <summary>
+                <i class="fa-solid fa-list-check fa-fw"></i>
+                <span>章节目录</span>
+                <i class="fa-solid fa-chevron-down fa-fw series-chevron"></i>
+            </summary>
+            <ul class="series-chapters">
+                
+                <li class="series-chapter">
+                    <a href="/2026/10/31/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day1/" title="Redis学习-Day1">
+                        <span class="chapter-no">Day1</span>
+                        <span class="chapter-title">Redis学习-Day1</span>
+                        <span class="chapter-date">10/31</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/01/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day2/" title="Redis学习-Day2">
+                        <span class="chapter-no">Day2</span>
+                        <span class="chapter-title">Redis学习-Day2</span>
+                        <span class="chapter-date">11/1</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/02/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day3/" title="Redis学习-Day3">
+                        <span class="chapter-no">Day3</span>
+                        <span class="chapter-title">Redis学习-Day3</span>
+                        <span class="chapter-date">11/2</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/03/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day4/" title="Redis学习-Day4">
+                        <span class="chapter-no">Day4</span>
+                        <span class="chapter-title">Redis学习-Day4</span>
+                        <span class="chapter-date">11/3</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/04/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day5/" title="Redis学习-Day5">
+                        <span class="chapter-no">Day5</span>
+                        <span class="chapter-title">Redis学习-Day5</span>
+                        <span class="chapter-date">11/4</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/05/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day6/" title="Redis学习-Day6">
+                        <span class="chapter-no">Day6</span>
+                        <span class="chapter-title">Redis学习-Day6</span>
+                        <span class="chapter-date">11/5</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/06/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day7/" title="Redis学习-Day7">
+                        <span class="chapter-no">Day7</span>
+                        <span class="chapter-title">Redis学习-Day7</span>
+                        <span class="chapter-date">11/6</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/07/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day8/" title="Redis学习-Day8">
+                        <span class="chapter-no">Day8</span>
+                        <span class="chapter-title">Redis学习-Day8</span>
+                        <span class="chapter-date">11/7</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter is-current">
+                    <a href="/2026/11/16/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day9/" title="Redis学习-Day9">
+                        <span class="chapter-no">Day9</span>
+                        <span class="chapter-title">Redis学习-Day9</span>
+                        <span class="chapter-date">11/16</span>
+                    </a>
+                </li>
+                
+                <li class="series-chapter">
+                    <a href="/2026/11/22/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day10/" title="Redis学习-Day10">
+                        <span class="chapter-no">Day10</span>
+                        <span class="chapter-title">Redis学习-Day10</span>
+                        <span class="chapter-date">11/22</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </details>
+        
+        <a class="series-nav-link next" href="/2026/11/22/Redis%E6%96%87%E6%A1%A3/Redis%E5%AD%A6%E4%B9%A0-Day10/">
+            <span>
+                <em>下一章</em>
+                <strong>Day10</strong>
+            </span>
+            <i class="fa-solid fa-arrow-right fa-fw"></i>
+        </a>
+        
+    </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Yuisuki&#39;s home
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Yuisuki521
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
