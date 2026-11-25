@@ -210,6 +210,33 @@
         <h1 id="Redission"><a href="#Redission" class="headerlink" title="Redission"></a>Redission</h1><h2 id="Redisson入门"><a href="#Redisson入门" class="headerlink" title="Redisson入门"></a>Redisson入门</h2><p>1.引入依赖：<br><dependency><br>    <groupId>org.redisson</groupId><br>    <artifactId>redisson</artifactId><br>    <version>3.13.6</version><br></dependency></p>
 <p>2.配置Redisson客户端：<br>@Configuration<br>public class RedisConfig {<br>    @Bean<br>    public RedissonClient redissonClient() {<br>        &#x2F;&#x2F; 配置类<br>        Config config &#x3D; new Config();<br>        &#x2F;&#x2F; 添加redis地址，这里添加了单点的地址，也可以使用config.useClusterServers()添加集群地址<br>        config.useSingleServer().setAddress(“redis:&#x2F;&#x2F;192.168.150.101:6379”).setPassword(“123321”);<br>        &#x2F;&#x2F; 创建客户端<br>        return Redisson.create(config);<br>    }<br>}</p>
 <p>3.使用Redisson的分布式锁：<br>@Resource<br>private RedissonClient redissonClient;<br>@Test<br>void testRedisson() throws InterruptedException {<br>    &#x2F;&#x2F; 获取锁（可重入），指定锁的名称<br>    RLock lock &#x3D; redissonClient.getLock(“anyLock”);<br>    &#x2F;&#x2F; 尝试获取锁，参数分别是：获取锁的最大等待时间（期间会重试），锁自动释放时间，时间单位<br>    boolean isLock &#x3D; lock.tryLock(1, 10, TimeUnit.SECONDS);<br>    &#x2F;&#x2F; 判断释放获取成功<br>    if (isLock) {<br>        try {<br>            System.out.println(“执行业务”);<br>        } finally {<br>            &#x2F;&#x2F; 释放锁<br>            lock.unlock();<br>        }<br>    }<br>}</p>
+<h2 id="Redission可重入锁原理"><a href="#Redission可重入锁原理" class="headerlink" title="Redission可重入锁原理"></a>Redission可重入锁原理</h2><p>Redisson的锁底层用Hash结构存储：key是锁名称，value中的field是线程唯一标识，value是重入次数。<br>| KEY | VALUE(field) | VALUE(value) |<br>| lock | threadId | 0 |</p>
+<p>可重入锁流程：<br>    A([开始]) –&gt; B{判断锁是否存在}<br>    B – 否 –&gt; C[获取锁并添加线程标识]<br>    C –&gt; D[设置锁有效期]<br>    B – 是 –&gt; E{判断锁标识是否是自己}<br>    E – 否 –&gt; F[获取锁失败]<br>    E – 是 –&gt; G[锁计数+1]<br>    G –&gt; D<br>    D –&gt; H[执行业务]<br>    H –&gt; I{判断锁是否是自己}<br>    I – 否 –&gt; J[锁已释放]<br>    I – 是 –&gt; K[锁计数-1]<br>    K –&gt; L{判断锁计数是否为0}<br>    L – 否 –&gt; M[重置锁有效期]<br>    M –&gt; H<br>    L – 是 –&gt; N[释放锁]</p>
+<h2 id="Redisson分布式锁原理"><a href="#Redisson分布式锁原理" class="headerlink" title="Redisson分布式锁原理"></a>Redisson分布式锁原理</h2><h3 id="获取锁流程"><a href="#获取锁流程" class="headerlink" title="获取锁流程"></a>获取锁流程</h3><pre><code>A([开始]) --&gt; B[尝试获取锁]
+B --&gt; C{判断ttl是否为null}
+C -- 是 --&gt; D{leaseTime是否为-1}
+D -- 是 --&gt; E[开启watchdog]
+E --&gt; F[返回true]
+C -- 否 --&gt; G{判断剩余等待时间是否大于0}
+G -- 否 --&gt; H[返回false]
+G -- 是 --&gt; I[订阅并等待释放信号]
+I --&gt; J{判断等待时间是否超时}
+J -- 否 --&gt; B
+J -- 是 --&gt; H
+</code></pre>
+<p>获取锁失败时不是立即放弃，而是订阅锁的释放信号后重试等待，直到超过最大等待时间为止。leaseTime&#x3D;-1表示没有指定释放时间，由watchdog自动续期。</p>
+<h3 id="释放锁流程"><a href="#释放锁流程" class="headerlink" title="释放锁流程"></a>释放锁流程</h3><pre><code>A([开始]) --&gt; B[尝试释放锁]
+B --&gt; C{判断是否成功}
+C -- 否 --&gt; D[记录异常]
+C -- 是 --&gt; E[发送释放消息]
+E --&gt; F[取消watchdog]
+F --&gt; G([结束])
+D --&gt; G
+</code></pre>
+<p>释放锁成功后需要：1.发布释放消息通知等待队列里的线程；2.关闭watchdog，避免锁被错误续期。</p>
+<h2 id="Redisson分布式锁主从一致性问题"><a href="#Redisson分布式锁主从一致性问题" class="headerlink" title="Redisson分布式锁主从一致性问题"></a>Redisson分布式锁主从一致性问题</h2><p>问题:Redis主从同步是异步的：Java应用通过<code>SET lock thread1 NX EX 10</code>获取锁成功，key还没同步到Slave时Master就宕机，Slave晋升为新Master，但新Master上没有这个锁key，其他线程又能获取到同一把锁，锁就失效了。集群中每个Node都存在同样的问题。</p>
+<p>解决方案:在Redis集群中，让客户端同时向多个Redis节点尝试获取锁，只有在过半节点（如5个节点里至少3个）都获取锁成功时，才认为整体获取锁成功。释放锁时需要对所有节点依次执行释放，避免锁残留在节点上。这样即使少数节点主从切换丢失了锁，其他节点上的锁仍然存在，保证整体的安全性。</p>
+<h3 id="RedLock实现思路"><a href="#RedLock实现思路" class="headerlink" title="RedLock实现思路"></a>RedLock实现思路</h3><p>获取所有Redis节点的连接<br>依次向每个节点发送<code>SET key value NX EX timeout</code>命令<br>统计成功的节点数，过半则认为获取锁成功，否则依次释放已获取的锁<br>释放锁时，遍历所有节点执行释放脚本，确保每个节点上的锁都被清理</p>
 
     </div>
     
